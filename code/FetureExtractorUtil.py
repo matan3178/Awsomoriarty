@@ -5,9 +5,9 @@ import math
 
 
 def start(data):
-    normalize=string_to_float(remove_null_rows(remove_redundent_lines_and_rows(data)))
-    (data_to_vector_size(normalize))
-    (derivation(normalize))
+    normalize = string_to_float(remove_null_rows(remove_redundent_lines_and_rows(data)))
+    print(data_to_vector_size(normalize))
+    #(derivation(normalize))
 
 
 def string_to_float(data):
@@ -60,4 +60,4 @@ print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
 print(data_to_vector_size([[1,2,3],[-5,5,6],[7,8,9]]))
 print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
 print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))
-print(stringToDouble([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
+print(string_to_float([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
