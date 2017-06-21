@@ -4,9 +4,8 @@ from code.FileLoader import FileLoader
 
 
 def do_something():
-    fl = FileLoader()
-    fl.load_csv_file(definitions.MORIARTY_DIR + str("0a50e09262.csv"))
-    print(fl)
+    fl = FileLoader(use_cache=False)
+    fl.load_collection2v3(definitions.COLLECTION3V6_DIR)
     return
 
 
