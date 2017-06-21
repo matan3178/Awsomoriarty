@@ -21,5 +21,5 @@ class LogSingleton:
         return LogSingleton.log
 
 
-def print(text, status=NORMAL):
-    LogSingleton.get_singleton().print(status + text + NORMAL)
+def print(msg, status=NORMAL):
+    LogSingleton.get_singleton().print(status + str(msg) + NORMAL)
