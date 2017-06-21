@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4840087f-6a34-4a5b-9163-f398e72406e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/definitions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log/Log.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log/Print.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log/__init__.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/consts.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/FileLoader.py" afterPath="$PROJECT_DIR$/code/FileLoader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/main.py" afterPath="$PROJECT_DIR$/code/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/utils.py" afterPath="$PROJECT_DIR$/code/utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/Print.py" afterPath="$PROJECT_DIR$/log/Print.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +28,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -89,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Print.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Print.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/log/Print.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,11 +121,11 @@
         <option value="$PROJECT_DIR$/log/log.py" />
         <option value="$PROJECT_DIR$/log/Log.py" />
         <option value="$PROJECT_DIR$/definitions.py" />
-        <option value="$PROJECT_DIR$/log/Print.py" />
         <option value="$PROJECT_DIR$/code/utils.py" />
         <option value="$PROJECT_DIR$/code/__init__.py" />
         <option value="$PROJECT_DIR$/code/FileLoader.py" />
         <option value="$PROJECT_DIR$/code/main.py" />
+        <option value="$PROJECT_DIR$/log/Print.py" />
       </list>
     </option>
   </component>
@@ -459,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498045037308</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="working paths and printing">
+      <created>1498050968641</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1498050968641</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -472,7 +470,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -496,7 +494,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added a main file" />
     <MESSAGE value="hello world" />
-    <option name="LAST_COMMIT_MESSAGE" value="hello world" />
+    <MESSAGE value="working paths and printing" />
+    <option name="LAST_COMMIT_MESSAGE" value="working paths and printing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -533,22 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/Print.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/definitions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="9" selection-end-line="1" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -580,6 +563,22 @@
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/definitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="9" selection-end-line="1" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/Print.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
