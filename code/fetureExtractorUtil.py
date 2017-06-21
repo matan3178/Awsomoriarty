@@ -8,7 +8,7 @@ def removeNullRows(list_of_lists):
         if 'null' in lst:
             warningFlag+=1
             if(warningFlag>1):
-                print("More than one null!",WARNING)
+                print("More than one null in a row!",WARNING)
         else:
             result.append(lst)
             warningFlag=0
@@ -32,4 +32,4 @@ def derivation(list2):
 
 print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
 print(dataToVectorSize([[1,2,3],[-5,5,6],[7,8,9]]))
-print(removeNullRows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null']]));
+print(removeNullRows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
