@@ -31,13 +31,13 @@ class FileLoader:
         user_hashes = list()
         users_training = dict()
         users_testing = dict()
-        for user_dir in os.listdir(collection_path):
+        for user_dir in os.listdir(collection_path)[:2]:
 
             user_hash = user_dir
             user_hashes.append(user_hash)
 
             training_path = "{}/{}/{}_training.csv".format(collection_path, user_hash, user_hash)
-            print(training_path, FAIL)
+            print("loading {}".format(training_path))
             users_training[user_hash] = self.load_csv_file(training_path)
             users_testing[user_hash] = [self.load_csv_file(test_file) for test_file in os.listdir("{}/{}".format(collection_path, user_hash)) if isfile(join(collection_path, user_hash, test_file))]
 
