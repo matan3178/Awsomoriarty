@@ -26,12 +26,12 @@ def remove_null_rows(list_of_lists):
     result = list();
     for lst in list_of_lists:
         if 'null' in lst:
-            warning_flag+=1
-            if(warning_flag>1):
+            warning_flag += 1
+            if warning_flag > 1:
                 print("More than one null in a row!",WARNING)
         else:
             result.append(lst)
-            warning_flag=0
+            warning_flag = 0
     return result
 
 
