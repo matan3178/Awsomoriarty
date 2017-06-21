@@ -1,17 +1,28 @@
+
 from log.Print import *
-from definitions import NUMBER_OF_REDUNDENT_LINES
+from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS
 import math
 
 
 def start(data):
-    normalize=remove_null_rows(remove_first_line(data))
-    print(data_to_vector_size(normalize))
-    print(derivation(normalize))
+    normalize=string_to_float(remove_null_rows(remove_redundent_lines_and_rows(data)))
+    (data_to_vector_size(normalize))
+    (derivation(normalize))
 
 
-def remove_first_line(data):
-    return data[NUMBER_OF_REDUNDENT_LINES:]
+def string_to_float(data):
+    result=list()
+    for lst in data:
+        temp=list()
+        for num in lst:
+            temp.append(float(num))
+        result.append(temp)
+    return result
 
+
+
+def remove_redundent_lines_and_rows(data):
+    return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in data[NUMBER_OF_REDUNDENT_LINES:]]
 
 def remove_null_rows(list_of_lists):
     warning_flag = 0;
@@ -48,4 +59,5 @@ def derivation(list2):
 print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
 print(data_to_vector_size([[1,2,3],[-5,5,6],[7,8,9]]))
 print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
-print(remove_first_line([[1,2,3],[-5,5,6],[7,8,9]]))
+print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))
+print(stringToDouble([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
