@@ -1,10 +1,11 @@
-def doSomething():
+def do_something():
 
     return
 
+
 def main():
     print("Welcome to Awesomoriarty!")
-    doSomething()
+    do_something()
     print("bye bye")
     return
 
