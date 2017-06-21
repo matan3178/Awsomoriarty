@@ -20,13 +20,12 @@ class FileLoader:
         if self.use_cache and path in self.cache:
             return self.cache[path]
         else:
-            data = list()
             with open(path) as datafile:
                 lines = enumerate(csv.reader(datafile, delimiter=","))
-                data.extend(lines)
-            if self.use_cache:
-                self.cache[path] = data
-            return data
+                data = [line[1] for line in lines]
+                if self.use_cache:
+                    self.cache[path] = data
+                return data
 
     def load_collection2v3(self, collection_path):
         user_hashes = list()
