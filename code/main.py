@@ -1,11 +1,13 @@
 import definitions
+from code.FetureExtractorUtil import start
 from log.Print import *
 from code.FileLoader import FileLoader
 
-
 def do_something():
     fl = FileLoader(use_cache=False)
-    fl.load_collection2v3(definitions.COLLECTION3V6_DIR)
+    hashes, training, testing=fl.load_collection2v3(definitions.COLLECTION3V6_DIR)
+    print(training[hashes[0]])
+    start(training[hashes[0]])
     return
 
 
