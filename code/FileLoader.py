@@ -24,4 +24,3 @@ class FileLoader:
                 data.extend(lines)
             if self.use_cache: self.cache[path] = data
             return data
-        return
