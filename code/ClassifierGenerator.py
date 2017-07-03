@@ -1,12 +1,13 @@
 from log.Print import *
 from sklearn.svm import OneClassSVM
 from keras.models import Model
-from keras.layers import Input, Dense, Activation, Dropout
+from keras.layers import Input, Dense
 
 
-def generateOneClassSVM_Mashu():
+def generate_one_class_svm_specific():
     clf = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
     return clf
+
 
 def generate_autoencoder(input_shape, hidden_layer_size, input_size):
     input_img = Input(shape=input_shape)

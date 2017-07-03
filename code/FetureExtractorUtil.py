@@ -9,16 +9,15 @@ def start(list_of_samples):
     return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_lines_and_rows(list_of_samples)))))
 
 
+# data manipulations
+
+
 def samples_to_np_arrays(list_of_samples):
     return np.array([np.array(sample) for sample in list_of_samples])
 
 
 def string_to_float(list_of_samples):
     return [[np.float32(feature) for feature in sample] for sample in list_of_samples]
-
-
-def remove_redundent_lines_and_rows(list_of_samples):
-    return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in list_of_samples[NUMBER_OF_REDUNDENT_LINES:]]
 
 
 def remove_null_rows(list_of_lists):
@@ -35,6 +34,13 @@ def remove_null_rows(list_of_lists):
     return result
 
 
+def remove_redundent_lines_and_rows(list_of_samples):
+    return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in list_of_samples[NUMBER_OF_REDUNDENT_LINES:]]
+
+
+# feature extraction
+
+
 def normalize_feature_vector_to_unit_size(list_of_samples):
     result = list()
     for lst in list_of_samples:
@@ -44,7 +50,7 @@ def normalize_feature_vector_to_unit_size(list_of_samples):
     return result
 
 
-def derivation(list_of_samples):
+def derivate_samples(list_of_samples):
     result = list()
     for i in range(len(list_of_samples)-1):
         temp = list()
@@ -63,7 +69,7 @@ def aggregate_samples_using_windows(list_of_samples, window_size):
 
 
 def run_feature_extraction_tests():
-    print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
+    print(derivate_samples([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
     print(normalize_feature_vector_to_unit_size([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
     print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
     print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))

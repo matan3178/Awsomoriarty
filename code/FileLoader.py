@@ -27,7 +27,7 @@ class FileLoader:
                     self.cache[path] = data
                 return data
 
-    def load_collection2v3(self, collection_path):
+    def load_collection3v2(self, collection_path):
         user_hashes = list()
         users_training = dict()
         users_testing = dict()
