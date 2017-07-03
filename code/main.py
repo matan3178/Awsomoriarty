@@ -8,6 +8,7 @@ from code.ClassifierGenerator import *
 def do_something():
     fl = FileLoader(use_cache=False)
     hashes, training, testing=fl.load_collection2v3(definitions.COLLECTION3V6_DIR)
+    print("found {} samples in training file of user {}".format(len(training[hashes[0]]), hashes[0]))
     print("extracting features...", HEADER)
     training_set = start(training[hashes[0]][:18000])
     testing_set = start(training[hashes[1]][:18000])

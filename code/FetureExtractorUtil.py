@@ -1,23 +1,24 @@
+from code.utils import sum_vectors
 from log.Print import *
 from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS
 import math
 import numpy as np
 
 
-def start(data):
-    return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_lines_and_rows(data)))))
+def start(list_of_samples):
+    return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_lines_and_rows(list_of_samples)))))
 
 
-def samples_to_np_arrays(data):
-    return np.array([np.array(sample) for sample in data])
+def samples_to_np_arrays(list_of_samples):
+    return np.array([np.array(sample) for sample in list_of_samples])
 
 
-def string_to_float(data):
-    return [[np.float32(feature) for feature in sample] for sample in data]
+def string_to_float(list_of_samples):
+    return [[np.float32(feature) for feature in sample] for sample in list_of_samples]
 
 
-def remove_redundent_lines_and_rows(data):
-    return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in data[NUMBER_OF_REDUNDENT_LINES:]]
+def remove_redundent_lines_and_rows(list_of_samples):
+    return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in list_of_samples[NUMBER_OF_REDUNDENT_LINES:]]
 
 
 def remove_null_rows(list_of_lists):
@@ -43,18 +44,27 @@ def normalize_feature_vector_to_unit_size(list_of_samples):
     return result
 
 
-def derivation(lst):
+def derivation(list_of_samples):
     result = list()
-    for i in range(len(lst)-1):
+    for i in range(len(list_of_samples)-1):
         temp = list()
-        for j in range(len(lst[i])):
-            temp.append(lst[i + 1][j] - lst[i][j])
+        for j in range(len(list_of_samples[i])):
+            temp.append(list_of_samples[i + 1][j] - list_of_samples[i][j])
         result.append(temp)
     return result
 
 
-# print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
-# print(normalize_feature_vector_to_unit_size([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
-# print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
-# print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))
-# print(string_to_float([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
+def aggregate_samples_using_sliding_windows(list_of_samples, window_size, slide_size):
+    return [sum_vectors(list_of_samples[i:i+slide_size]) for i in range(start=0, stop=window_size-slide_size, step=slide_size)]
+
+
+def aggregate_samples_using_windows(list_of_samples, window_size):
+    return aggregate_samples_using_sliding_windows(list_of_samples, window_size, slide_size=window_size)
+
+
+def run_feature_extraction_tests():
+    print(derivation([[1,2,3],[-5,5,6],[7,8,9]]))
+    print(normalize_feature_vector_to_unit_size([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
+    print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
+    print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))
+    print(string_to_float([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
