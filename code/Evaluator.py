@@ -1,4 +1,5 @@
 import numpy as np
+from log.Print import *
 
 class Evaluator:
     def train(self, classifier, training_set, test_set_benign, test_set_fraud):
@@ -29,4 +30,8 @@ class Evaluator:
         specificity = TN_counter / (TN_counter + FP_counter)
         false_alarm_rate = FP_counter  / (FP_counter + TN_counter)
 
-        print("generating svm...", HEADER)
+        print("error rate: {}".format(err_rate))
+        print("recall: {}".format(recall))
+        print("percision: {}".format(percision))
+        print("specificity: {}".format(specificity))
+        print("false alarm rate: {}".format(false_alarm_rate))
