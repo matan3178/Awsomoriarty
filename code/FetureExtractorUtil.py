@@ -20,7 +20,7 @@ def string_to_float(list_of_samples):
     return [[np.float32(feature) for feature in sample] for sample in list_of_samples]
 
 
-def remove_null_rows(list_of_lists):
+def remove_null_rows(list_of_lists, verbosity=0):
     null_counter = 0
     result = list()
     for lst in list_of_lists:
@@ -28,8 +28,8 @@ def remove_null_rows(list_of_lists):
             null_counter += 1
         else:
             result.append(lst)
-            if null_counter > 1:
-                print("Warning: {} nulls in a row".format(null_counter) , WARNING)
+            if null_counter > 1 and verbosity > 0:
+                print("Warning: {} nulls in a row".format(null_counter), FAIL if verbosity > 1 else WARNING)
             null_counter = 0
     return result
 
