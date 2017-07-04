@@ -15,5 +15,14 @@ class OneClassSVMCustomized:
     def predict(self, x_test):
         return [0. if p == -1 else 1. for p in self.svm.predict(x_test)]
 
+    num_of_alerts = 0
+    threshold = 100
+
     def alert_if_theft(self, sample):
-        return 1 if self.svm.predict(list(sample))[0] == 1 else 0
+        y = 1 if self.svm.predict(list([sample])) > 0 else 0
+        if y == 1:
+            self.num_of_alerts += 1
+        else:
+            if self.num_of_alerts > 1:
+                self.num_of_alerts -= 1
+        return 1 if self.num_of_alerts > self.threshold else 0

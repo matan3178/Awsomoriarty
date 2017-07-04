@@ -1,3 +1,4 @@
+from definitions import VERBOSITY
 from log.Print import *
 from code.DataCenter import DataCenter
 from code.Evaluator import train_and_evaluate
@@ -9,7 +10,7 @@ def do_something():
     ds = DataCenter()
     ds.load_data_collection3v2()
     h = ds.user_hashes[0]
-    training_set = start(ds.users_training[h][:5000])
+    training_set = start(ds.users_training[h][:20000])
     testing_benign, testing_theft = start(ds.users_testing[h][0][0]), start(ds.users_testing[h][0][1])
 
     svm_sigmoid = generate_one_class_svm_sigmoid()
@@ -17,10 +18,10 @@ def do_something():
     svm_rbf = generate_one_class_svm_rbf()
     svm_linear = generate_one_class_svm_linear()
 
-    train_and_evaluate(classifier=svm_linear, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
-    train_and_evaluate(classifier=svm_rbf, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
-    train_and_evaluate(classifier=svm_sigmoid, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
-    train_and_evaluate(classifier=svm_poly, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
+    train_and_evaluate(classifier=svm_linear, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
+    train_and_evaluate(classifier=svm_rbf, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
+    train_and_evaluate(classifier=svm_sigmoid, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
+    train_and_evaluate(classifier=svm_poly, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
 
     return
 

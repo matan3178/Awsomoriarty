@@ -6,7 +6,7 @@ import numpy as np
 
 
 def start(list_of_samples):
-    return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples)))))
+    return samples_to_np_arrays(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples))))
 
 
 # data manipulations

@@ -1,4 +1,6 @@
 import numpy as np
+from tables.idxutils import infinity
+
 from log.Print import *
 
 
@@ -18,18 +20,34 @@ def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud
     classifier.fit(training_set)  # unsupervised learning interface
 
     print("predicting...")
-    predictions = list(classifier.predict(test_set))
-    prediction_index = 0 #CHANGE THIS
-    return evaluate_sequence(len(test_set_benign),prediction_index)
-   # return evaluate(target_labels, predictions, verbosity)
+
+    return evaluate_sequence(len(test_set_benign),predict_sequence(classifier, test_set), verbosity), evaluate_samples(target_labels, list(predict_samples(classifier, test_set)), verbosity)
 
 
-def evaluate_sequence(real_fraud_index, predicted_fraud_index):
-    if predicted_fraud_index == "NO ALERT":
-        return "NO ALERT"
-    return predicted_fraud_index-real_fraud_index;
+def predict_sequence(classifier, x_test):
+    for sample, index in zip(x_test, range(len(x_test))):
+        if classifier.alert_if_theft(sample) == 1:
+            return index
+    return infinity
 
-def evaluate(target_labels, predictions, verbosity=0):
+
+def evaluate_sequence(real_fraud_index, predicted_fraud_index, verbosity=0):
+    print("real: {}; predicted: {}".format(real_fraud_index, predicted_fraud_index), WARNING)
+    distance = predicted_fraud_index - real_fraud_index
+    if verbosity > 0:
+        color = COMMENT
+        if verbosity > 1:
+            color = NORMAL
+
+        print("distance: {}".format(distance), color)
+    return distance
+
+
+def predict_samples(classifier, x_test):
+    return classifier.predict(x_test)
+
+
+def evaluate_samples(target_labels, predictions, verbosity=0):
     tp = 0
     fp = 0
     tn = 0
