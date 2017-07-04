@@ -19,9 +19,15 @@ def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud
 
     print("predicting...")
     predictions = list(classifier.predict(test_set))
+    prediction_index = 0 #CHANGE THIS
+    return evaluate_sequence(len(test_set_benign),prediction_index)
+   # return evaluate(target_labels, predictions, verbosity)
 
-    return evaluate(target_labels, predictions, verbosity)
 
+def evaluate_sequence(real_fraud_index, predicted_fraud_index):
+    if predicted_fraud_index == "NO ALERT":
+        return "NO ALERT"
+    return predicted_fraud_index-real_fraud_index;
 
 def evaluate(target_labels, predictions, verbosity=0):
     tp = 0
