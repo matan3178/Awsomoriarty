@@ -1,4 +1,4 @@
-from code.utils import sum_vectors
+from code.utils import average_vectors
 from log.Print import *
 from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY
 import math
@@ -6,7 +6,7 @@ import numpy as np
 
 
 def start(list_of_samples):
-    return samples_to_np_arrays(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples))))
+    return samples_to_np_arrays(derivate_samples(aggregate_samples_using_sliding_windows(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples))), 5, 3)))
 
 
 # data manipulations
@@ -56,7 +56,7 @@ def normalize_feature_vector_to_unit_size(list_of_samples):
 
 def derivate_samples(list_of_samples):
     result = list()
-    for i in range(len(list_of_samples)-1):
+    for i in range(len(list_of_samples) - 1):
         temp = list()
         for j in range(len(list_of_samples[i])):
             temp.append(list_of_samples[i + 1][j] - list_of_samples[i][j])
@@ -65,7 +65,7 @@ def derivate_samples(list_of_samples):
 
 
 def aggregate_samples_using_sliding_windows(list_of_samples, window_size, slide_size):
-    return [sum_vectors(list_of_samples[i:i+slide_size]) for i in range(0, window_size-slide_size, slide_size)]
+    return [average_vectors(*list_of_samples[i: i + window_size]) for i in range(0, len(list_of_samples) - window_size + 1, slide_size)]
 
 
 def aggregate_samples_using_windows(list_of_samples, window_size):
@@ -73,8 +73,9 @@ def aggregate_samples_using_windows(list_of_samples, window_size):
 
 
 def run_feature_extraction_tests():
-    print(derivate_samples([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
-    print(normalize_feature_vector_to_unit_size([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
-    print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
+    # print(derivate_samples([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
+    # print(normalize_feature_vector_to_unit_size([[1, 2, 3], [-5, 5, 6], [7, 8, 9]]))
+    # print(remove_null_rows([[1,2,3],[4,'null',6],[7,6,5],[1,'null','null'],[4,5,'null'],[1,2,3],[4,'null',6],[7,6,5],[1,'null','null']]));
     # print(remove_redundent_lines_and_rows([[1,2,3],[-5,5,6],[7,8,9]]))
-    print(string_to_float([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
+    # print(string_to_float([['1','2.5','3'],['-5','5','6'],['7','8','9']]))
+    print("aggregate: {} (expected {})".format(aggregate_samples_using_sliding_windows([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]], 2, 2), [[5, 7, 9], [11, 13, 15], [17, 19, 21]]))

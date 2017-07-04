@@ -14,5 +14,13 @@ def sum_vectors_binary(vec1, vec2):
     return [(v1 + v2) for v1, v2 in zip(vec1, vec2)]
 
 
-def sum_vectors(*vectors):
-    return [sum(values) for values in [vectors[i] for i in range(len(vectors))]]
+def average_vectors(* vectors):
+    denominator = len(vectors)
+    v_average = list()
+    for j in range(len(vectors[0])):
+        values = [vector[j] for vector in vectors]
+        v_average.append(sum(values))
+        v_average = [value / denominator for value in v_average]
+    # print("+{} = {}".format(vectors, v_average))
+
+    return v_average

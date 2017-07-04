@@ -2,15 +2,18 @@ from definitions import VERBOSITY
 from log.Print import *
 from code.DataCenter import DataCenter
 from code.Evaluator import train_and_evaluate
-from code.FetureExtractorUtil import start
+from code.FetureExtractorUtil import start, run_feature_extraction_tests
 from code.classifiers.ClassifierGenerator import *
 
 
 def do_something():
+    # run_feature_extraction_tests()
+
     ds = DataCenter()
     ds.load_data_collection3v2()
     h = ds.user_hashes[0]
-    training_set = start(ds.users_training[h][:20000])
+    training_set = start(ds.users_training[h][:2000])
+    print(training_set[0])
     testing_benign, testing_theft = start(ds.users_testing[h][0][0]), start(ds.users_testing[h][0][1])
 
     svm_sigmoid = generate_one_class_svm_sigmoid()
