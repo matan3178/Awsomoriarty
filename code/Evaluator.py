@@ -19,27 +19,17 @@ def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud
 
     print("predicting...")
     predictions = list(classifier.predict(test_set))
-
-    return evaluate_samples(target_labels, predictions, verbosity)
-
-
-def predict_samples(classifier, x_test):
-    return classifier.predict(x_test)
+    prediction_index = 0 #CHANGE THIS
+    return evaluate_sequence(len(test_set_benign),prediction_index)
+   # return evaluate(target_labels, predictions, verbosity)
 
 
-def predict_sequence(classifier, x_test):
-    index = 0
-    for sample in x_test:
-        p = classifier.alert_if_theft(x_test)
-        if p == 1:
-            return index
-        else:
-            index += 1
+def evaluate_sequence(real_fraud_index, predicted_fraud_index):
+    if predicted_fraud_index == "NO ALERT":
+        return "NO ALERT"
+    return predicted_fraud_index-real_fraud_index;
 
-    return "NO ALERT"
-
-
-def evaluate_samples(target_labels, predictions, verbosity=0):
+def evaluate(target_labels, predictions, verbosity=0):
     tp = 0
     fp = 0
     tn = 0
