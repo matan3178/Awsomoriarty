@@ -4,9 +4,24 @@ from keras.models import Model
 from keras.layers import Input, Dense
 
 
-def generate_one_class_svm_specific():
-    clf = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
-    return clf
+def generate_one_class_svm_linear():
+    svm = OneClassSVM(nu=0.5, kernel='linear')
+    return svm
+
+
+def generate_one_class_svm_sigmoid():
+    svm = OneClassSVM(nu=0.5, kernel='sigmoid')
+    return svm
+
+
+def generate_one_class_svm_poly():
+    svm = OneClassSVM(nu=0.5, kernel='poly')
+    return svm
+
+
+def generate_one_class_svm_rbf():
+    svm = OneClassSVM(nu=0.5, kernel='rbf')
+    return svm
 
 
 def generate_autoencoder(input_shape, hidden_layer_size, input_size):

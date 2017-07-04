@@ -1,4 +1,6 @@
 import definitions
+from code.DataCenter import DataCenter
+from code.Evaluator import train_and_evaluate
 from code.FetureExtractorUtil import start, samples_to_np_arrays
 from log.Print import *
 from code.FileLoader import FileLoader
@@ -6,18 +8,24 @@ from code.ClassifierGenerator import *
 
 
 def do_something():
-    fl = FileLoader(use_cache=False)
-    hashes, training, testing=fl.load_collection3v2(definitions.COLLECTION3V2_DIR)
-    print("found {} samples in training file of user {}".format(len(training[hashes[0]]), hashes[0]))
-    print("extracting features...", HEADER)
-    training_set = start(training[hashes[0]][:18000])
-    testing_set = start(training[hashes[1]][:18000])
-    print("generating svm...", HEADER)
-    svm = generate_one_class_svm_specific()
-    print("training... ({} samples)".format(len(training_set)), HEADER)
-    svm.fit(training_set)
-    print("predicting...", HEADER)
-    print(len([y for y in svm.predict(testing_set) if y == 1]))
+    ds = DataCenter()
+    ds.load_data_collection3v2()
+    h = ds.user_hashes[0]
+    training_set = start(ds.users_training[h][:10000])
+    testing_benign, testing_theft = start(ds.users_testing[h][0][0][:10000]), start(ds.users_testing[h][0][1][:10000])
+
+    svm_sigmoid = generate_one_class_svm_sigmoid()
+    svm_poly = generate_one_class_svm_poly()
+    svm_rbf = generate_one_class_svm_rbf()
+
+    print("One Class SVM (rbf)", HEADER)
+    train_and_evaluate(classifier=svm_rbf, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
+
+    print("One Class SVM (sigmoid)", HEADER)
+    train_and_evaluate(classifier=svm_sigmoid, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
+
+    print("One Class SVM (poly)", HEADER)
+    train_and_evaluate(classifier=svm_poly, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=1)
 
     return
 
