@@ -7,5 +7,6 @@ class Log:
         return
 
     def print_log(self):
-        print(self.log)
+        for line in self.log:
+            print(line)
         return

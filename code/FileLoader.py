@@ -52,7 +52,7 @@ class FileLoader:
             # load testing sets
             test_dirs = [test_dir for test_dir in os.listdir("{}/{}".format(collection_path, user_hash))
                          if not isfile("{}/{}/{}".format(collection_path, user_hash, test_dir))]
-            test_dirs = test_dirs[:num_of_users] if num_of_users > 0 else test_dirs
+            test_dirs = test_dirs[:num_of_tests_per_user] if num_of_tests_per_user > 0 else test_dirs
 
             users_testing[user_hash] = list()
             for test_dir in test_dirs:

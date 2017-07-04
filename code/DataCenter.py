@@ -1,6 +1,6 @@
 from code.FetureExtractorUtil import remove_redundent_rows
 from log.Print import *
-import definitions
+from definitions import *
 from code.FileLoader import FileLoader
 
 
@@ -20,7 +20,11 @@ class DataCenter:
 
     def load_data_collection3v2(self):
 
-        self.user_hashes, all_users_training, all_users_all_testing_contiguous = self.file_loader.load_collection3v2(definitions.COLLECTION3V2_DIR, verbosity=2, num_of_users=1, num_of_tests_per_user=1)
+        self.user_hashes, all_users_training, all_users_all_testing_contiguous = \
+            self.file_loader.load_collection3v2(COLLECTION3V2_DIR,
+                                                verbosity=VERBOSITY,
+                                                num_of_users=LIGHT_LOADING_num_of_users,
+                                                num_of_tests_per_user=LIGHT_LOADING_num_of_tests_per_user)
 
         self.users_training = dict()
         for h in self.user_hashes:

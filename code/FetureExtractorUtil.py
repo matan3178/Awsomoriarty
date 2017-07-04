@@ -1,12 +1,12 @@
 from code.utils import sum_vectors
 from log.Print import *
-from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS
+from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY
 import math
 import numpy as np
 
 
 def start(list_of_samples):
-    return samples_to_np_arrays(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples))))
+    return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples)))))
 
 
 # data manipulations
@@ -20,7 +20,7 @@ def string_to_float(list_of_samples):
     return [[np.float64(feature) for feature in sample] for sample in list_of_samples]
 
 
-def remove_null_rows(list_of_samples, verbosity=1):
+def remove_null_rows(list_of_samples, verbosity=VERBOSITY):
     null_counter = 0
     result = list()
     for sample in list_of_samples:
@@ -28,8 +28,8 @@ def remove_null_rows(list_of_samples, verbosity=1):
             null_counter += 1
         else:
             result.append(sample)
-            if null_counter > 1 and verbosity > 0:
-                print("Warning: {} nulls in a row".format(null_counter), FAIL if verbosity > 1 else WARNING)
+            if null_counter > 1 and verbosity > 1:
+                print("Warning: {} nulls in a row".format(null_counter), WARNING)
             null_counter = 0
     return result
 

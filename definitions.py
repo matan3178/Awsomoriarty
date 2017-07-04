@@ -11,3 +11,8 @@ NUMBER_OF_REDUNDENT_COLUMNS = 2
 print("ROOT_DIR = " + ROOT_DIR, COMMENT)
 print("MORIARTY_DIR = " + MORIARTY_DIR, COMMENT)
 print("COLLECTION3V6_DIR = " + COLLECTION3V2_DIR, COMMENT)
+
+# debug:
+LIGHT_LOADING_num_of_users = 1              # -1 for all users
+LIGHT_LOADING_num_of_tests_per_user = 1     # -1 for all test files
+VERBOSITY = 1

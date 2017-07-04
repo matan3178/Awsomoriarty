@@ -4,6 +4,7 @@ from log.Print import *
 
 def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud, verbosity=0):
     print("evaluation begun:", UNDERLINE)
+    print("Name: {}".format(classifier.name))
 
     test_set = list()
     test_set.extend(test_set_benign)
@@ -29,9 +30,6 @@ def evaluate(target_labels, predictions, verbosity=0):
     fn = 0
     length = len(target_labels)
     for t, p in zip(target_labels, predictions):
-        if p == -1:
-            p = 0
-
         if t == 0 and p == 1:
             fp += 1
         if t == 1 and p == 0:
@@ -41,7 +39,8 @@ def evaluate(target_labels, predictions, verbosity=0):
         if t == 1 and p == 1:
             tp += 1
 
-    print("found {} total number of samples (?= {} ?= {})".format(tp + fp + tn + fn, len(target_labels), len(predictions)))
+    if verbosity > 1:
+        print("found {} total number of samples (?= {} ?= {})".format(tp + fp + tn + fn, len(target_labels), len(predictions)), COMMENT)
 
     err_rate = (fp + fn) / length
     recall = tp / (tp + fn)
