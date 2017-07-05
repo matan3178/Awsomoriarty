@@ -1,4 +1,6 @@
-from definitions import VERBOSITY
+from tables.idxutils import infinity
+
+from definitions import VERBOSITY_general
 from log.Print import *
 from code.DataCenter import DataCenter
 from code.Evaluator import train_and_evaluate
@@ -11,21 +13,23 @@ def do_something():
 
     ds = DataCenter()
     ds.load_data_collection3v2()
-    h = ds.user_hashes[0]
-    training_set = start(ds.users_training[h][:2000])
-    print(training_set[0])
-    testing_benign, testing_theft = start(ds.users_testing[h][0][0]), start(ds.users_testing[h][0][1])
+    best_dist = infinity
+    for h in ds.user_hashes:
+        training_set = start(ds.users_training[h])
+        testing_benign, testing_theft = start(ds.users_testing[h][0][0]), start(ds.users_testing[h][0][1])
 
-    svm_sigmoid = generate_one_class_svm_sigmoid()
-    svm_poly = generate_one_class_svm_poly()
-    svm_rbf = generate_one_class_svm_rbf()
-    svm_linear = generate_one_class_svm_linear()
+        classifiers = list()
+        # classifiers.append(generate_one_class_svm_linear())
+        # classifiers.append(generate_one_class_svm_sigmoid())
+        # classifiers.append(generate_one_class_svm_rbf())
+        # classifiers.append(generate_one_class_svm_poly())
+        classifiers.append(generate_autoencoder(len(training_set[0])))
+        for c in classifiers:
+            current_dist = train_and_evaluate(classifier=c, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)[0]
+            if abs(current_dist) < abs(best_dist):
+                best_dist = current_dist
 
-    train_and_evaluate(classifier=svm_linear, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
-    train_and_evaluate(classifier=svm_rbf, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
-    train_and_evaluate(classifier=svm_sigmoid, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
-    train_and_evaluate(classifier=svm_poly, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY)
-
+    print("best distance: {}".format(best_dist))
     return
 
 

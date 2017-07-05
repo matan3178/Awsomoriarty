@@ -1,12 +1,12 @@
 from code.utils import average_vectors
 from log.Print import *
-from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY
+from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY_general
 import math
 import numpy as np
 
 
 def start(list_of_samples):
-    return samples_to_np_arrays(derivate_samples(aggregate_samples_using_sliding_windows(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples))), 5, 3)))
+    return samples_to_np_arrays(normalize_feature_vector_to_unit_size(string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples)))))
 
 
 # data manipulations
@@ -20,7 +20,7 @@ def string_to_float(list_of_samples):
     return [[np.float64(feature) for feature in sample] for sample in list_of_samples]
 
 
-def remove_null_rows(list_of_samples, verbosity=VERBOSITY):
+def remove_null_rows(list_of_samples, verbosity=VERBOSITY_general):
     null_counter = 0
     result = list()
     for sample in list_of_samples:

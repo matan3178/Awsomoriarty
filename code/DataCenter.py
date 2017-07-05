@@ -22,7 +22,7 @@ class DataCenter:
 
         self.user_hashes, all_users_training, all_users_all_testing_contiguous = \
             self.file_loader.load_collection3v2(COLLECTION3V2_DIR,
-                                                verbosity=VERBOSITY,
+                                                verbosity=VERBOSITY_general,
                                                 num_of_users=LIGHT_LOADING_num_of_users,
                                                 num_of_tests_per_user=LIGHT_LOADING_num_of_tests_per_user)
 

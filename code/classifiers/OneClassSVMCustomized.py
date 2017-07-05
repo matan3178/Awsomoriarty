@@ -23,6 +23,5 @@ class OneClassSVMCustomized:
         if y == 1:
             self.num_of_alerts += 1
         else:
-            if self.num_of_alerts > 1:
-                self.num_of_alerts -= 1
+            self.num_of_alerts = 0
         return 1 if self.num_of_alerts > self.threshold else 0

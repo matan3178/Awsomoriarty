@@ -24,3 +24,11 @@ def average_vectors(* vectors):
     # print("+{} = {}".format(vectors, v_average))
 
     return v_average
+
+
+def mse(x_vector, y_vector):
+    sum_of_squared_errors = 0
+    for x, y in zip(x_vector, y_vector):
+        sum_of_squared_errors += y**2 - x**2
+
+    return sum_of_squared_errors / len(x_vector)
