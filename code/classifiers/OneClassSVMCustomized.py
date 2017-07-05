@@ -25,3 +25,13 @@ class OneClassSVMCustomized:
         else:
             self.num_of_alerts = 0
         return 1 if self.num_of_alerts > self.threshold else 0
+
+    def has_predict_threshold(self):
+        return False
+
+    def has_alert_threshold(self):
+        return True
+
+    def set_alert_threshold(self, threshold):
+        self.threshold = threshold
+        return

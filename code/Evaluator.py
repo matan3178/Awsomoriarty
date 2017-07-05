@@ -21,7 +21,13 @@ def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud
 
     print("predicting...")
 
-    return evaluate_sequence(len(test_set_benign),predict_sequence(classifier, test_set), verbosity), evaluate_samples(target_labels, list(predict_samples(classifier, test_set)), verbosity)
+    # return evaluate_sequence(len(test_set_benign), predict_sequence(classifier, test_set), verbosity), \
+    #        evaluate_samples(target_labels, list(predict_samples(classifier, test_set)), verbosity)
+    return generate_threshold_prediction_results(classifier=classifier,
+                                                 x_test=test_set,
+                                                 y_test=target_labels,
+                                                 verbosity=verbosity,
+                                                 threshold_end=0.04)
 
 
 def predict_sequence(classifier, x_test):
@@ -83,3 +89,34 @@ def evaluate_samples(target_labels, predictions, verbosity=0):
         print("false alarm rate: {}".format(false_alarm_rate), color)
 
     return tp, fp, tn, fn, err_rate, precision, recall, specificity, false_alarm_rate
+
+
+def generate_threshold_prediction_results(classifier, x_test, y_test, num_of_steps=100, threshold_begin=0, threshold_end=1, verbosity=0):
+
+    if not classifier.has_predict_threshold():
+        err_msg = "ERROR: classifier doesn't have 'threshold' parameter"
+        if verbosity > 0:
+            print(err_msg, FAIL)
+        return err_msg
+
+    results = list()
+    threshold_step = (threshold_end - threshold_begin) / num_of_steps
+    threshold = threshold_begin
+    if verbosity > 0:
+        print("evaluating classifier '{}' with thresholds in range({}, {}, {})".format(classifier.name,
+                                                                                       threshold_begin,
+                                                                                       threshold_end,
+                                                                                       threshold_step),
+              UNDERLINE)
+
+    for i in range(num_of_steps):
+        if verbosity > 0:
+            print("threshold={}".format(threshold), COMMENT)
+
+        classifier.set_predict_threshold(threshold)
+        results.append(evaluate_samples(target_labels=y_test,
+                                        predictions=list(predict_samples(classifier, x_test)),
+                                        verbosity=verbosity))
+        threshold += threshold_step
+
+    return results

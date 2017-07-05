@@ -29,9 +29,7 @@ def generate_one_class_svm_rbf():
 def generate_autoencoder(input_size):
 
     input_layer = Input(shape=(input_size,))
-    hidden = Dense(units=int(input_size * 0.75), activation='relu')(input_layer)
-    hidden = Dense(units=int(input_size * 0.5), activation='relu')(hidden)
-    hidden = Dense(units=int(input_size * 0.75), activation='relu')(hidden)
+    hidden = Dense(units=int(input_size * 0.2), activation='linear')(input_layer)
     output_layer = Dense(units=input_size, activation='sigmoid')(hidden)
 
     # encoder = Model(input_img, encoded)
@@ -39,10 +37,6 @@ def generate_autoencoder(input_size):
     autoencoder.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
 
     return AutoEncoder(inner_autoencoder=autoencoder,
-                       name="AutoEncoder {}>{}>{}<{}<{}".format(input_size,
-                                                                int(input_size * 0.75),
-                                                                int(input_size * 0.5),
-                                                                int(input_size * 0.75),
-                                                                input_size),
-                       epochs_number=50,
-                       batch_size=5)
+                       name="AutoEncoder {}>{}<{}".format(input_size, int(input_size * 0.2), input_size),
+                       epochs_number=30,
+                       batch_size=2)

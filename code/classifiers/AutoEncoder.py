@@ -40,3 +40,13 @@ class AutoEncoder:
 
     def alert_if_theft(self, sample):
         return self.predict(list([sample]))
+
+    def has_predict_threshold(self):
+        return True
+
+    def has_alert_threshold(self):
+        return False
+
+    def set_predict_threshold(self, threshold):
+        self.threshold = threshold
+        return
