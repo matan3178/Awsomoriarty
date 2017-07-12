@@ -1,7 +1,6 @@
 import numpy as np
 from tables.idxutils import infinity
-
-from log.Print import *
+from code.log.Print import *
 
 
 def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud, verbosity=0):
@@ -21,9 +20,9 @@ def train_and_evaluate(classifier, training_set, test_set_benign, test_set_fraud
 
     print("predicting...")
 
-    # return evaluate_sequence(len(test_set_benign), predict_sequence(classifier, test_set), verbosity), \
-    #        evaluate_samples(target_labels, list(predict_samples(classifier, test_set)), verbosity)
-    return generate_threshold_prediction_results(classifier=classifier,
+    return evaluate_sequence(len(test_set_benign), predict_sequence(classifier, test_set), verbosity), \
+           evaluate_samples(target_labels, list(predict_samples(classifier, test_set)), verbosity), \
+           generate_threshold_prediction_results(classifier=classifier,
                                                  x_test=test_set,
                                                  y_test=target_labels,
                                                  verbosity=verbosity,

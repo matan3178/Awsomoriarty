@@ -1,6 +1,7 @@
-import definitions
-from code.utils import mse
 import numpy as np
+
+from code import _definitions
+from code.utils import mse
 
 
 class AutoEncoder:
@@ -22,7 +23,7 @@ class AutoEncoder:
     def fit(self, x_train):
         x_train = np.array(x_train)
         self.encoder_decoder.fit(x_train, x_train, epochs=self.epochs_number, batch_size=self.batch_size,
-                                 verbose=definitions.VERBOSITY_training_autoencoder, shuffle=True)
+                                 verbose=_definitions.VERBOSITY_training_autoencoder, shuffle=True)
         return
 
     def predict(self, x_test):

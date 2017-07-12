@@ -1,29 +1,29 @@
-from code.utils import average_vectors
-from log.Print import *
-from definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY_general
 import math
+
 import numpy as np
+
+from code._definitions import NUMBER_OF_REDUNDENT_LINES, NUMBER_OF_REDUNDENT_COLUMNS, VERBOSITY_general
+from code.log.Print import *
+from code.utils import average_vectors, flatten_list
 
 
 def start(list_of_samples):
     return samples_to_np_arrays(
         normalize_feature_vector_to_unit_size(
-            derivate_samples(
-                aggregate_samples_using_sliding_windows(
-                    string_to_float(
-                        remove_null_rows(
-                            remove_redundent_columns(list_of_samples)
-                        )
-                    ),
-                    5,
-                    2
-                )
+            aggregate_samples_using_sliding_windows(
+                string_to_float(
+                    remove_null_rows(
+                        remove_redundent_columns(list_of_samples)
+                    )
+                ),
+                5,
+                2
             )
         )
     )
 
 
-# data manipulations
+# data manipulation
 
 
 def samples_to_np_arrays(list_of_samples):
@@ -56,6 +56,18 @@ def remove_redundent_columns(list_of_samples):
     return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in list_of_samples]
 
 
+def sliding_windows(list_of_samples, window_size, slide_size):
+    return [list_of_samples[i:i + window_size] for i in range(0, len(list_of_samples) - window_size + slide_size, slide_size)]
+
+
+def windows(list_of_samples, window_size):
+    return sliding_windows(list_of_samples, window_size, window_size)
+
+
+def flatten_windows(list_of_windows):
+    return [flatten_list(sample_list) for sample_list in list_of_windows]
+
+
 # feature extraction
 
 
@@ -79,11 +91,14 @@ def derivate_samples(list_of_samples):
 
 
 def aggregate_samples_using_sliding_windows(list_of_samples, window_size, slide_size):
-    return [average_vectors(*list_of_samples[i: i + window_size]) for i in range(0, len(list_of_samples) - window_size + 1, slide_size)]
+    return [average_vectors(* window) for window in sliding_windows(list_of_samples, window_size, slide_size)]
 
 
 def aggregate_samples_using_windows(list_of_samples, window_size):
     return aggregate_samples_using_sliding_windows(list_of_samples, window_size, slide_size=window_size)
+
+
+# testing
 
 
 def run_feature_extraction_tests():

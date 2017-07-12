@@ -1,4 +1,4 @@
-from log.Print import *
+from code.log.Print import *
 
 
 def flatten_list(lst):

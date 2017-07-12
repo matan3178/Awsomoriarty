@@ -1,3 +1,6 @@
+from code.log.Print import *
+
+
 class OneClassSVMCustomized:
 
     svm = "UNINITIALIZED"
@@ -16,7 +19,7 @@ class OneClassSVMCustomized:
         return [0. if p == -1 else 1. for p in self.svm.predict(x_test)]
 
     num_of_alerts = 0
-    threshold = 100
+    threshold = 1
 
     def alert_if_theft(self, sample):
         y = 1 if self.svm.predict(list([sample])) > 0 else 0

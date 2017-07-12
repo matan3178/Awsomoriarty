@@ -1,7 +1,6 @@
-from code.FetureExtractorUtil import remove_redundent_rows
-from log.Print import *
-from definitions import *
 from code.FileLoader import FileLoader
+from code._definitions import *
+from code.features.FetureExtractorUtil import remove_redundent_rows
 
 
 class DataCenter:
