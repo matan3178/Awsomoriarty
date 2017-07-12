@@ -8,17 +8,17 @@ from code.classifiers.OneClassSVMCustomized import OneClassSVMCustomized
 
 
 def generate_one_class_svm_linear():
-    svm = OneClassSVM(nu=0.1, kernel='linear', verbose=False)
+    svm = OneClassSVM(nu=0.1, kernel='linear', gamma=0.1, verbose=False)
     return OneClassSVMCustomized(svm, name="OneClassSVM_Linear")
 
 
 def generate_one_class_svm_sigmoid():
-    svm = OneClassSVM(nu=0.1, kernel='sigmoid', verbose=False)
+    svm = OneClassSVM(nu=0.1, kernel='sigmoid', gamma=0.1, verbose=False)
     return OneClassSVMCustomized(svm, name="OneClassSVM_Sigmoid")
 
 
 def generate_one_class_svm_poly():
-    svm = OneClassSVM(nu=0.1, kernel='poly', verbose=False)
+    svm = OneClassSVM(nu=0.1, kernel='poly', gamma=0.1, verbose=False)
     return OneClassSVMCustomized(svm, name="OneClassSVM_Poly")
 
 
@@ -68,7 +68,7 @@ def generate_lstm_autoencoder(sample_size, window_size):
     autoencoder.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
 
     return LSTMAutoEncoder(inner_autoencoder=autoencoder,
-                           name="LSTM_AutoEncoder ({},{})>{}<{}".format(window_size,
+                           name="LSTM_AutoEncoder({},{})->({})->({})".format(window_size,
                                                                         sample_size,
                                                                         window_size,
                                                                         window_size * sample_size),

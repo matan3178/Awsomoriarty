@@ -16,16 +16,15 @@ def benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud):
 # ____________________________________________________ Classifiers
 
 
-def train_and_evaluate_classifier(classifier, training_set, test_set_benign, test_set_fraud, verbosity=0):
+def evaluate_classifier(classifier, training_set, test_set_benign, test_set_fraud, verbosity=0):
     print("evaluating classifier {}...".format(classifier.get_name()), UNDERLINE)
-    print("training...")
-    train_classifier(classifier, training_set)
     test_set, target_labels = benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud)
     print("predicting...")
-    return evaluate_classifier(target_labels, list(classifier_predict(classifier, test_set)), verbosity)
+    return evaluate_predictions(target_labels, list(classifier_predict(classifier, test_set)), verbosity)
 
 
 def train_classifier(classifier, training_set):
+    print("training classifier {}...".format(classifier.get_name()))
     classifier.fit(training_set)  # unsupervised learning interface
 
 
@@ -33,7 +32,7 @@ def classifier_predict(classifier, x_test):
     return classifier.predict(x_test)
 
 
-def evaluate_classifier(target_labels, predictions, verbosity=0):
+def evaluate_predictions(target_labels, predictions, verbosity=0):
     tp = 0
     fp = 0
     tn = 0
@@ -101,32 +100,29 @@ def evaluate_ids(ids, test_set_benign, test_set_fraud, verbosity=0):
 
 
 # might need to be changed to support ids/classifier
-def generate_threshold_prediction_results(classifier, x_test, y_test, num_of_steps=100, threshold_begin=0, threshold_end=1, verbosity=0):
-
-    if not classifier.has_predict_threshold():
-        err_msg = "ERROR: classifier doesn't have 'threshold' parameter"
-        if verbosity > 0:
-            print(err_msg, FAIL)
-        return err_msg
-
+def do_for_threshold_range(threshold_settable, generate_results_func, num_of_steps, threshold_begin, threshold_end):
     results = list()
-    threshold_step = (threshold_end - threshold_begin) / num_of_steps
-    threshold = threshold_begin
-    if verbosity > 0:
-        print("evaluating classifier '{}' with thresholds in range({}, {}, {})".format(classifier.get_name(),
-                                                                                       threshold_begin,
-                                                                                       threshold_end,
-                                                                                       threshold_step),
-              UNDERLINE)
-
+    t = threshold_begin
+    t_step = (threshold_end - threshold_begin) / num_of_steps
     for i in range(num_of_steps):
-        if verbosity > 0:
-            print("threshold={}".format(threshold), COMMENT)
+        threshold_settable.set_threshold(t)
+        results.append(generate_results_func())
+        t += t_step
+    return
 
-        classifier.set_threshold(threshold)
-        results.append(evaluate_classifier(target_labels=y_test,
-                                           predictions=list(classifier_predict(classifier, x_test)),
-                                           verbosity=verbosity))
-        threshold += threshold_step
 
-    return results
+def evaluate_classifier_in_range(classifier, training_set, test_set_benign, test_set_fraud,
+                                 num_of_steps=100, threshold_begin=0.01, threshold_end=1,
+                                 verbosity=0):
+    print("evaluating {} with threshold in range [{},{}] and number of steps = {}".format(classifier.get_name(), threshold_begin, threshold_end, num_of_steps), UNDERLINE + OKBLUE)
+    if not classifier.has_threshold():
+        print("classifier doesn't have a threshold property", FAIL)
+        raise Exception("(evaluate_classifier_in_range): classifier doesn't have a threshold property")
+        return
+    train_classifier(classifier=classifier, training_set=training_set)
+    testing_set, target_labels = benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud)
+    return do_for_threshold_range(threshold_settable=classifier,
+                                  generate_results_func=lambda: evaluate_classifier(classifier, training_set, test_set_benign, test_set_fraud, verbosity),
+                                  num_of_steps=num_of_steps,
+                                  threshold_begin=threshold_begin,
+                                  threshold_end=threshold_end)

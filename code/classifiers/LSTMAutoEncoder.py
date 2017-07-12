@@ -16,7 +16,7 @@ class LSTMAutoEncoder:
     window_size = "UNINITIALIZED"
     last_window = "UNINITIALIZED"
 
-    def __init__(self, inner_autoencoder, name="AutoEncoder (?)", threshold=0.5, epochs_number=1, batch_size=1, window_size=5):
+    def __init__(self, inner_autoencoder, name="LSTMAutoEncoder (?)", threshold=0.5, epochs_number=1, batch_size=1, window_size=5):
         self.encoder_decoder = inner_autoencoder
         self.name = name
         self.threshold = threshold
@@ -27,7 +27,7 @@ class LSTMAutoEncoder:
         return
 
     def get_name(self):
-        return self.name
+        return "{} (threshold={})".format(self.name, self.threshold)
 
     def fit(self, training_set):
         x_train = sliding_windows(training_set, self.window_size, 1)
@@ -62,7 +62,6 @@ class LSTMAutoEncoder:
             else:
                 predictions.append(0)
 
-        print("prediction successful!", HEADER)
         return predictions
 
     def predict_single(self, sample):

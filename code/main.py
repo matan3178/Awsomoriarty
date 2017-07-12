@@ -1,6 +1,6 @@
 from tables.idxutils import infinity
 
-from code.Evaluator import train_and_evaluate_classifier, evaluate_ids
+from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range
 from code._definitions import VERBOSITY_general
 from code.classifiers.ClassifierGenerator import *
 from code.data_handles.DataCenter import DataCenter
@@ -30,7 +30,17 @@ def do_something():
         classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 10))
 
         for c in classifiers:
-            train_and_evaluate_classifier(classifier=c, training_set=training_set, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)[0]
+            train_classifier(c, training_set)
+
+        for c in classifiers:
+            if c.has_threshold():
+                evaluate_classifier_in_range(classifier=c, training_set=training_set,
+                                         test_set_benign=testing_benign, test_set_fraud=testing_theft,
+                                         threshold_begin=0.001, threshold_end=0.1, num_of_steps=10,
+                                         verbosity=VERBOSITY_general)
+            else:
+                print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
+                evaluate_classifier(c, training_set, testing_benign, testing_theft, VERBOSITY_general)
 
         IDSs = list()
         IDSs.extend([ContiguousOnesIDS(classifier=c, threshold=10) for c in classifiers])

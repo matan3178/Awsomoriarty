@@ -21,7 +21,7 @@ class AutoEncoder:
         return
 
     def get_name(self):
-        return self.name
+        return "{} (threshold={})".format(self.name, self.threshold)
 
     def fit(self, x_train):
         x_train = np.array(x_train)
