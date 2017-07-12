@@ -43,7 +43,7 @@ def generate_autoencoder(input_size):
                        batch_size=2)
 
 
-def generate_recurrent_autoencoder(sample_size, window_size):
+def generate_lstm_autoencoder(sample_size, window_size):
     input_layer = Input(shape=(window_size, sample_size))
     hidden = LSTM(units=window_size, activation='tanh',
                   recurrent_activation='hard_sigmoid',
@@ -72,4 +72,4 @@ def generate_recurrent_autoencoder(sample_size, window_size):
                                                                         sample_size,
                                                                         window_size,
                                                                         window_size * sample_size),
-                           epochs_number=10, batch_size=50, window_size=window_size)
+                           epochs_number=10, batch_size=50, window_size=window_size, threshold=0.05)

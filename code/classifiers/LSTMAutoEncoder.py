@@ -1,5 +1,4 @@
 import numpy as np
-
 from code import _definitions
 from code.features.FetureExtractorUtil import sliding_windows, flatten_windows
 from code.log.Print import *
@@ -27,19 +26,19 @@ class LSTMAutoEncoder:
         self.window_size = window_size
         return
 
-    def fit(self, training_set):
-        print("length: {}".format(len(training_set)))
+    def get_name(self):
+        return self.name
 
+    def fit(self, training_set):
         x_train = sliding_windows(training_set, self.window_size, 1)
-        print("length: {}".format(len(x_train)))
         self.last_window = x_train[len(x_train) - 1]
-        print(np.array(self.last_window).shape, FAIL)
         x_train = np.array(x_train)
 
         y_train = flatten_windows(x_train)
         y_train = np.array(y_train)
 
-        print("input shape: {}; output shape: {}".format(x_train.shape, y_train.shape))
+        print("lstm input shape: {}; output shape: {}".format(x_train.shape[1:], y_train.shape[1:]), COMMENT)
+        print("lstm training_set size: {}".format(x_train.shape[0]), COMMENT)
 
         self.encoder_decoder.fit(x_train, y_train, epochs=self.epochs_number, batch_size=self.batch_size,
                                  verbose=_definitions.VERBOSITY_training_autoencoder, shuffle=True)
@@ -50,7 +49,13 @@ class LSTMAutoEncoder:
 
         reconstructions = self.encoder_decoder.predict(np.array(x_test))
         predictions = list()
-
+        # the first [window_size - 1] samples fill the window,
+        # the sample at index [window_size] is the first to generate a real prediction
+        #
+        # generate dummy prediction for first [window_size - 1] samples
+        # |
+        # v
+        predictions.extend(np.zeros(self.window_size - 1))
         for reconst, x in zip(reconstructions, x_test):
             if mse(reconst, flatten_list(x)) > self.threshold:
                 predictions.append(1)
@@ -60,24 +65,21 @@ class LSTMAutoEncoder:
         print("prediction successful!", HEADER)
         return predictions
 
-    def alert_if_theft(self, sample):
+    def predict_single(self, sample):
+        if len(self.last_window) < self.window_size:
+            self.last_window.append(sample)
+            return 0
+
         self.last_window = self.last_window[1:]
         self.last_window.append(sample)
 
         reconstruction = self.encoder_decoder.predict(np.array([self.last_window]))
         # print(reconstruction.shape, OKBLUE)
-        alert = 0
-        if mse(reconstruction[0], flatten_list(self.last_window)) > self.threshold:
-            alert = 1
+        return 1 if mse(reconstruction[0], flatten_list(self.last_window)) > self.threshold else 0
 
-        return alert
-
-    def has_predict_threshold(self):
+    def has_threshold(self):
         return True
 
-    def has_alert_threshold(self):
-        return False
-
-    def set_predict_threshold(self, threshold):
+    def set_threshold(self, threshold):
         self.threshold = threshold
         return

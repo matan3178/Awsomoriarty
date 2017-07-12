@@ -20,6 +20,9 @@ class AutoEncoder:
         self.batch_size = batch_size
         return
 
+    def get_name(self):
+        return self.name
+
     def fit(self, x_train):
         x_train = np.array(x_train)
         self.encoder_decoder.fit(x_train, x_train, epochs=self.epochs_number, batch_size=self.batch_size,
@@ -39,15 +42,12 @@ class AutoEncoder:
 
         return predictions
 
-    def alert_if_theft(self, sample):
-        return self.predict(list([sample]))
+    def predict_single(self, sample):
+        return 1 if self.predict(list([sample]))[0] > self.threshold else 0
 
-    def has_predict_threshold(self):
+    def has_threshold(self):
         return True
 
-    def has_alert_threshold(self):
-        return False
-
-    def set_predict_threshold(self, threshold):
+    def set_threshold(self, threshold):
         self.threshold = threshold
         return
