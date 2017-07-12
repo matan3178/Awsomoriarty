@@ -46,6 +46,9 @@ def do_something():
         IDSs.extend([ContiguousOnesIDS(classifier=c, threshold=10) for c in classifiers])
         IDSs.extend([AccumulativeOnesIDS(classifier=c, threshold=10) for c in classifiers])
 
+        print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
+        print("")
+
         for ids in IDSs:
             current_dist = evaluate_ids(ids=ids, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)
             if abs(current_dist) < abs(best_dist):
