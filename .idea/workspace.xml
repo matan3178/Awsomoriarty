@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4840087f-6a34-4a5b-9163-f398e72406e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/ids/ContiguousOnesIDS.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/ids/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/data_handles/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/Evaluator.py" afterPath="$PROJECT_DIR$/code/Evaluator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/_definitions.py" afterPath="$PROJECT_DIR$/code/_definitions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/AutoEncoder.py" afterPath="$PROJECT_DIR$/code/classifiers/AutoEncoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py" afterPath="$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" afterPath="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py" afterPath="$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/main.py" afterPath="$PROJECT_DIR$/code/main.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/code/DataCenter.py" afterPath="$PROJECT_DIR$/code/data_handles/DataCenter.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/code/FileLoader.py" afterPath="$PROJECT_DIR$/code/data_handles/FileLoader.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,18 +24,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AutoEncoder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/classifiers/AutoEncoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ClassifierGenerator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Evaluator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Evaluator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/Evaluator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state relative-caret-position="288">
+              <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
               <folding>
                 <element signature="e#158#422#0" expanded="false" />
                 <element signature="e#605#978#0" expanded="false" />
@@ -95,16 +77,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OneClassSVMCustomized.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LSTMAutoEncoder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,6 +87,16 @@
                 <element signature="e#865#881#0" expanded="false" />
                 <element signature="e#924#1564#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,14 +121,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_definitions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/_definitions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -206,9 +196,9 @@
         <option value="$PROJECT_DIR$/code/log/Print.py" />
         <option value="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" />
         <option value="$PROJECT_DIR$/code/ids/ContiguousOnesIDS.py" />
-        <option value="$PROJECT_DIR$/code/main.py" />
         <option value="$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py" />
         <option value="$PROJECT_DIR$/code/Evaluator.py" />
+        <option value="$PROJECT_DIR$/code/main.py" />
       </list>
     </option>
   </component>
@@ -266,60 +256,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="code" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ids" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="code" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="features" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Awsomoriarty" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="code" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classifiers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -336,6 +272,7 @@
       <recent name="D:\Awsomoriarty\code\classifiers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Awsomoriarty\code\data_handles" />
       <recent name="D:\Awsomoriarty\code" />
       <recent name="D:\Awsomoriarty\code\features" />
       <recent name="D:\Awsomoriarty\code\classifiers" />
@@ -406,7 +343,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Awsomoriarty" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/FileLoader.py" />
+      <option name="SCRIPT_NAME" value="D:\Awsomoriarty\code\data_handles\FileLoader.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -846,7 +783,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499859056166</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="IntrusionDetectionSystem abstraction over classifiers &#10;+ relevant evaluation methods&#10;- 'generate_threshold_results' might be fucked up now">
+      <created>1499864914657</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1499864914657</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -902,7 +846,8 @@
     <MESSAGE value="autoencoder" />
     <MESSAGE value="stuff" />
     <MESSAGE value="lstm + stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="lstm + stuff" />
+    <MESSAGE value="IntrusionDetectionSystem abstraction over classifiers &#10;+ relevant evaluation methods&#10;- 'generate_threshold_results' might be fucked up now" />
+    <option name="LAST_COMMIT_MESSAGE" value="IntrusionDetectionSystem abstraction over classifiers &#10;+ relevant evaluation methods&#10;- 'generate_threshold_results' might be fucked up now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -933,14 +878,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/FileLoader.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/FileLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/DataCenter.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/DataCenter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -961,7 +906,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/DataCenter.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/DataCenter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1041,7 +986,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/FileLoader.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/FileLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
@@ -1154,14 +1099,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/FileLoader.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/FileLoader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/DataCenter.py">
+    <entry file="file://$PROJECT_DIR$/code/data_handles/DataCenter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
@@ -1188,14 +1133,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1234,14 +1171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/_definitions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1323,20 +1252,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/main.py">
+    <entry file="file://$PROJECT_DIR$/code/_definitions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/Evaluator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="132" column="0" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
           <folding>
             <element signature="e#158#422#0" expanded="false" />
             <element signature="e#605#978#0" expanded="false" />
@@ -1344,6 +1279,14 @@
             <element signature="e#2562#2704#0" expanded="false" />
             <element signature="e#3704#4946#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

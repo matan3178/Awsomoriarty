@@ -1,9 +1,9 @@
 from tables.idxutils import infinity
 
-from code.DataCenter import DataCenter
 from code.Evaluator import train_and_evaluate_classifier, evaluate_ids
-from code.classifiers.ClassifierGenerator import *
 from code._definitions import VERBOSITY_general
+from code.classifiers.ClassifierGenerator import *
+from code.data_handles.DataCenter import DataCenter
 from code.features.FetureExtractorUtil import start
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS

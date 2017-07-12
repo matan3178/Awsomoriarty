@@ -1,5 +1,5 @@
-from code.FileLoader import FileLoader
 from code._definitions import *
+from code.data_handles.FileLoader import FileLoader
 from code.features.FetureExtractorUtil import remove_redundent_rows
 
 
