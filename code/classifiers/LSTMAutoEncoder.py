@@ -44,25 +44,25 @@ class LSTMAutoEncoder:
                                  verbose=_definitions.VERBOSITY_training_autoencoder, shuffle=True)
         return
 
-    def predict(self, x_test):
+    def predict_MSEs(self, x_test):
         x_test = sliding_windows(x_test, self.window_size, 1)
-
         reconstructions = self.encoder_decoder.predict(np.array(x_test))
-        predictions = list()
+        mses = list()
         # the first [window_size - 1] samples fill the window,
         # the sample at index [window_size] is the first to generate a real prediction
         #
         # generate dummy prediction for first [window_size - 1] samples
         # |
         # v
-        predictions.extend(np.zeros(self.window_size - 1))
+        mses.extend(np.zeros(self.window_size - 1))
         for reconst, x in zip(reconstructions, x_test):
-            if mse(reconst, flatten_list(x)) > self.threshold:
-                predictions.append(1)
-            else:
-                predictions.append(0)
+            mses.append(mse(reconst, flatten_list(x)))
+        return mses
 
-        return predictions
+    def predict(self, x_test, mses=None):
+        if mses == None:
+            mses = self.predict_MSEs(x_test)
+        return [1 if mse > self.threshold else 0 for mse in mses]
 
     def predict_single(self, sample):
         if len(self.last_window) < self.window_size:
@@ -74,6 +74,7 @@ class LSTMAutoEncoder:
 
         reconstruction = self.encoder_decoder.predict(np.array([self.last_window]))
         # print(reconstruction.shape, OKBLUE)
+        # print(mse(reconstruction[0], flatten_list(self.last_window)))
         return 1 if mse(reconstruction[0], flatten_list(self.last_window)) > self.threshold else 0
 
     def has_threshold(self):
@@ -82,3 +83,12 @@ class LSTMAutoEncoder:
     def set_threshold(self, threshold):
         self.threshold = threshold
         return
+
+    def supports_repredictions(self):
+        return True
+
+    def predict_raw(self, x_test):
+        return self.predict_MSEs(x_test)
+
+    def repredict(self, raw_data):
+        return self.predict(x_test=None, mses=raw_data)

@@ -1,6 +1,6 @@
 from code._definitions import *
 from code.data_handles.FileLoader import FileLoader
-from code.features.FetureExtractorUtil import remove_redundent_rows
+from code.features.FetureExtractorUtil import remove_redundent_rows, remove_redundent_columns
 
 
 class DataCenter:
@@ -14,6 +14,8 @@ class DataCenter:
     HASH_INDEX_IN_SAMPLE = 0
     TIMESTAMP_INDEX_IN_SAMPLE = 1
 
+    features_names = "UNINITIALIZED"
+
     def __init__(self):
         return
 
@@ -24,6 +26,8 @@ class DataCenter:
                                                 verbosity=VERBOSITY_general,
                                                 num_of_users=LIGHT_LOADING_num_of_users,
                                                 num_of_tests_per_user=LIGHT_LOADING_num_of_tests_per_user)
+        # names of features in the dataset (without userId and UUID)
+        self.features_names = all_users_training[self.user_hashes[0]][0][NUMBER_OF_REDUNDENT_COLUMNS:]
 
         self.users_training = dict()
         for h in self.user_hashes:

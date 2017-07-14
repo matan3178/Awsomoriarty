@@ -5,7 +5,7 @@ from code._definitions import VERBOSITY_general
 from code.classifiers.ClassifierGenerator import *
 from code.data_handles.DataCenter import DataCenter
 from code.features.FeatureSelection import split_information_gain
-from code.features.FetureExtractorUtil import start
+from code.features.FetureExtractorUtil import start, remove_all_columns_except
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
 
@@ -13,42 +13,66 @@ from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
 def do_something():
     # run_feature_extraction_tests()
 
-    ds = DataCenter()
-    ds.load_data_collection3v2()
+    dc = DataCenter()
+    dc.load_data_collection3v2()
     print("(finished loading)")
 
     best_dist = infinity
-    for h in ds.user_hashes:
+    for h in dc.user_hashes:
         print("USER {}".format(h), HEADER)
-        training_set = start(ds.users_training[h][:1000])
-        testing_benign, testing_theft = start(ds.users_testing[h][0][0][:1000]), start(ds.users_testing[h][0][1][:1000])
+        print("extracting features...", HEADER)
+        training_set = start(dc.users_training[h])
+        testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
 
-        for i in range(len(training_set[0])):
-            print(split_information_gain(l1_data=testing_benign, l2_data=testing_theft, feature_index=i))
+        print("selecting features...", HEADER)
+        features = list()
+        for name, i in zip(dc.features_names, range(len(dc.features_names))):
+            features.append([name, i])
 
+        info_gain_to_name = dict()
+        for name, index in features:
+            gain = split_information_gain(l1_data=testing_benign, l2_data=testing_theft, feature_index=index)
+            info_gain_to_name[gain] = name
+            print("{}: {}".format(name, gain))
+
+        best_gains = sorted(info_gain_to_name.keys())[len(info_gain_to_name.keys())-9:]
+        selected_feature_names = [info_gain_to_name[gain] for gain in best_gains]
+        selected_feature_indexes = [feature[1] for feature in features if feature[0] in selected_feature_names]
+        print("selected features: {}; (gains: {})".format(selected_feature_names, best_gains), OKBLUE)
+        print("")
+        training_set = remove_all_columns_except(training_set, selected_feature_indexes)
+        testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
+        testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
+
+        print("generating classifiers...", HEADER)
         classifiers = list()
-        classifiers.append(generate_one_class_svm_linear())
-        classifiers.append(generate_one_class_svm_sigmoid())
-        classifiers.append(generate_one_class_svm_rbf())
-        classifiers.append(generate_one_class_svm_poly())
-        classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 10))
+        # classifiers.append(generate_one_class_svm_linear())
+        # classifiers.append(generate_one_class_svm_sigmoid())
+        # classifiers.append(generate_one_class_svm_rbf())
+        # classifiers.append(generate_one_class_svm_poly())
+        classifiers.append(generate_autoencoder(len(training_set[0])))
+        # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
 
+        print("training classifiers...", HEADER)
         for c in classifiers:
             train_classifier(c, training_set)
 
+        print("evaluating...", HEADER)
         for c in classifiers:
             if c.has_threshold():
-                evaluate_classifier_in_range(classifier=c, training_set=training_set,
-                                         test_set_benign=testing_benign, test_set_fraud=testing_theft,
-                                         threshold_begin=0.001, threshold_end=0.1, num_of_steps=10,
-                                         verbosity=VERBOSITY_general)
+                opt_threshold = evaluate_classifier_in_range(classifier=c, training_set=training_set,
+                                                              test_set_benign=testing_benign, test_set_fraud=testing_theft,
+                                                              threshold_begin=0, threshold_end=0.1, num_of_steps=1000,
+                                                              verbosity=VERBOSITY_general-1)
+                c.set_threshold(opt_threshold)
+                print("{} has been set threshold {}".format(c.get_name(), opt_threshold), COMMENT)
             else:
                 print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
-                evaluate_classifier(c, training_set, testing_benign, testing_theft, VERBOSITY_general)
+                evaluate_classifier(c, testing_benign, testing_theft, VERBOSITY_general)
 
         IDSs = list()
-        IDSs.extend([ContiguousOnesIDS(classifier=c, threshold=10) for c in classifiers])
-        IDSs.extend([AccumulativeOnesIDS(classifier=c, threshold=10) for c in classifiers])
+        IDSs.extend([ContiguousOnesIDS(classifier=c, threshold=15) for c in classifiers])
+        IDSs.extend([AccumulativeOnesIDS(classifier=c, threshold=15) for c in classifiers])
 
         print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
         print("")

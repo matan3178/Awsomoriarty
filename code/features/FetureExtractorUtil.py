@@ -56,6 +56,18 @@ def remove_redundent_columns(list_of_samples):
     return [sample[NUMBER_OF_REDUNDENT_COLUMNS:] for sample in list_of_samples]
 
 
+def remove_all_columns_except(list_of_samples, list_of_columns_to_keep):
+    projection = list()
+    for sample in list_of_samples:
+        row = list()
+        for i in list_of_columns_to_keep:
+            row.append(sample[i])
+
+        projection.append(row)
+
+    return projection
+
+
 def sliding_windows(list_of_samples, window_size, slide_size):
     return [list_of_samples[i:i + window_size] for i in range(0, len(list_of_samples) - window_size + slide_size, slide_size)]
 

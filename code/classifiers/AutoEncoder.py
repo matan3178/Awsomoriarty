@@ -29,18 +29,17 @@ class AutoEncoder:
                                  verbose=_definitions.VERBOSITY_training_autoencoder, shuffle=True)
         return
 
-    def predict(self, x_test):
+    def predict_mses(self, x_test):
         x_test = np.array(x_test)
         reconstructions = self.encoder_decoder.predict(x_test)
-        predictions = list()
+        mses = [mse(reconst, x) for reconst, x in zip(reconstructions, x_test)]
+        return mses
 
-        for reconst, x in zip(reconstructions, x_test):
-            if mse(reconst, x) > self.threshold:
-                predictions.append(1)
-            else:
-                predictions.append(0)
+    def get_predictions_from_mses(self, mses):
+        return [1 if mse > self.threshold else 0 for mse in mses]
 
-        return predictions
+    def predict(self, x_test):
+        return self.get_predictions_from_mses(self.predict_raw(x_test))
 
     def predict_single(self, sample):
         return 1 if self.predict(list([sample]))[0] > self.threshold else 0
@@ -51,3 +50,12 @@ class AutoEncoder:
     def set_threshold(self, threshold):
         self.threshold = threshold
         return
+
+    def supports_repredictions(self):
+        return True
+
+    def predict_raw(self, x_test):
+        return self.predict_mses(x_test)
+
+    def repredict(self, raw_data):
+        return self.get_predictions_from_mses(raw_data)
