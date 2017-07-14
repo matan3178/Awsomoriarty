@@ -1,9 +1,10 @@
 from tables.idxutils import infinity
-
+from code.log.Print import *
 from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range
 from code._definitions import VERBOSITY_general
 from code.classifiers.ClassifierGenerator import *
 from code.data_handles.DataCenter import DataCenter
+from code.features.FeatureSelection import split_information_gain
 from code.features.FetureExtractorUtil import start
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
@@ -21,6 +22,9 @@ def do_something():
         print("USER {}".format(h), HEADER)
         training_set = start(ds.users_training[h][:1000])
         testing_benign, testing_theft = start(ds.users_testing[h][0][0][:1000]), start(ds.users_testing[h][0][1][:1000])
+
+        for i in range(len(training_set[0])):
+            print(split_information_gain(l1_data=testing_benign, l2_data=testing_theft, feature_index=i))
 
         classifiers = list()
         classifiers.append(generate_one_class_svm_linear())
@@ -54,7 +58,7 @@ def do_something():
             if abs(current_dist) < abs(best_dist):
                 best_dist = current_dist
 
-        print("best distance (for user {}): {}".format(h, best_dist))
+        print("best distance (for user {}): {}".format(h, best_dist), BOLD + OKBLUE)
     return
 
 
