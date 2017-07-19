@@ -4,13 +4,11 @@
     <list default="true" id="4840087f-6a34-4a5b-9163-f398e72406e2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/Evaluator.py" afterPath="$PROJECT_DIR$/code/Evaluator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/_definitions.py" afterPath="$PROJECT_DIR$/code/_definitions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/AutoEncoder.py" afterPath="$PROJECT_DIR$/code/classifiers/AutoEncoder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py" afterPath="$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" afterPath="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/data_handles/DataCenter.py" afterPath="$PROJECT_DIR$/code/data_handles/DataCenter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/features/FeatureSelection.py" afterPath="$PROJECT_DIR$/code/features/FeatureSelection.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" afterPath="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/main.py" afterPath="$PROJECT_DIR$/code/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/utils.py" afterPath="$PROJECT_DIR$/code/utils.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Awsomoriarty$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1500073783805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
+    <SUITE FILE_PATH="coverage/Awsomoriarty$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1500472093585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Awsomoriarty$fetureExtractorUtil.coverage" NAME="fetureExtractorUtil Coverage Results" MODIFIED="1498069344911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Awsomoriarty$main.coverage" NAME="main Coverage Results" MODIFIED="1498050892062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Awsomoriarty$FileLoader.coverage" NAME="FileLoader Coverage Results" MODIFIED="1498068620956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
@@ -28,19 +26,26 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Evaluator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Evaluator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/Evaluator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
+            <state relative-caret-position="1224">
+              <caret line="165" column="26" lean-forward="false" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
               <folding>
-                <element signature="e#158#422#0" expanded="false" />
-                <element signature="e#1262#1394#0" expanded="false" />
-                <element signature="e#1445#1478#0" expanded="false" />
-                <element signature="e#1552#3050#0" expanded="false" />
-                <element signature="e#3392#3463#0" expanded="false" />
-                <element signature="e#3539#4091#0" expanded="false" />
-                <element signature="e#5510#5673#0" expanded="false" />
+                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#231#495#0" expanded="false" />
+                <element signature="e#654#986#0" expanded="false" />
+                <element signature="e#1077#1280#0" expanded="false" />
+                <element signature="e#1335#1467#0" expanded="false" />
+                <element signature="e#1518#1551#0" expanded="false" />
+                <element signature="e#1625#3194#0" expanded="false" />
+                <element signature="e#3292#3434#0" expanded="false" />
+                <element signature="e#3536#3607#0" expanded="false" />
+                <element signature="e#3683#4235#0" expanded="false" />
+                <element signature="e#4493#5005#0" expanded="false" />
+                <element signature="e#5654#5817#0" expanded="false" />
+                <element signature="e#5941#6355#0" expanded="false" />
+                <element signature="e#7020#7328#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,28 +54,10 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="24" column="106" lean-forward="true" selection-start-line="24" selection-start-column="106" selection-end-line="24" selection-end-column="106" />
+            <state relative-caret-position="799">
+              <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LSTMAutoEncoder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="61" column="22" lean-forward="true" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
-              <folding>
-                <element signature="e#600#835#0" expanded="false" />
-                <element signature="e#869#929#0" expanded="false" />
-                <element signature="e#972#1612#0" expanded="false" />
-                <element signature="e#2297#2424#0" expanded="false" />
-                <element signature="e#2472#2972#0" expanded="false" />
-                <element signature="e#3011#3022#0" expanded="false" />
-                <element signature="e#3072#3113#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -79,8 +66,18 @@
       <file leaf-file-name="AutoEncoder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/classifiers/AutoEncoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="986">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OneClassSVMCustomized.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,41 +86,78 @@
       <file leaf-file-name="ClassifierGenerator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FetureExtractorUtil.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/features/FetureExtractorUtil.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            <state relative-caret-position="391">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
-                <element signature="e#698#753#0" expanded="false" />
-                <element signature="e#798#880#0" expanded="false" />
-                <element signature="e#955#1313#0" expanded="false" />
-                <element signature="e#1364#1437#0" expanded="false" />
-                <element signature="e#1922#2044#0" expanded="false" />
-                <element signature="e#2094#2159#0" expanded="false" />
-                <element signature="e#2204#2273#0" expanded="false" />
-                <element signature="e#2363#2529#0" expanded="false" />
-                <element signature="e#2575#2828#0" expanded="false" />
-                <element signature="e#3102#3202#0" expanded="false" />
-                <element signature="e#3257#3881#0" expanded="false" />
+                <element signature="e#1068#1694#0" expanded="false" />
+                <element signature="e#1758#3343#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_definitions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/_definitions.py">
+      <file leaf-file-name="FeatureSelection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/features/FeatureSelection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="51">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+                <element signature="e#235#873#0" expanded="false" />
+                <element signature="e#962#1534#0" expanded="false" />
+                <element signature="e#1599#1800#0" expanded="false" />
+                <element signature="e#1864#2294#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AccumulativeOnesIDS.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding>
+                <element signature="e#826#837#0" expanded="false" />
+                <element signature="e#887#928#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContiguousOnesIDS.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/ids/ContiguousOnesIDS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#725#736#0" expanded="false" />
+                <element signature="e#786#827#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FetureExtractorUtil.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/features/FetureExtractorUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <folding>
+                <element signature="e#496#551#0" expanded="false" />
+                <element signature="e#596#678#0" expanded="false" />
+                <element signature="e#753#1111#0" expanded="false" />
+                <element signature="e#1162#1235#0" expanded="false" />
+                <element signature="e#1289#1364#0" expanded="false" />
+                <element signature="e#1444#1650#0" expanded="false" />
+                <element signature="e#1704#1763#0" expanded="false" />
+                <element signature="e#1833#1955#0" expanded="false" />
+                <element signature="e#2005#2070#0" expanded="false" />
+                <element signature="e#2115#2184#0" expanded="false" />
+                <element signature="e#2678#2931#0" expanded="false" />
+                <element signature="e#3205#3305#0" expanded="false" />
+                <element signature="e#3360#3984#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -159,6 +193,8 @@
       <find>error rate:</find>
       <find>0.05</find>
       <find>evaluate_classifier(</find>
+      <find>x_y</find>
+      <find>fp: 30</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,7 +212,6 @@
         <option value="$PROJECT_DIR$/code/ClassifierGenerator.py" />
         <option value="$PROJECT_DIR$/log/Log.py" />
         <option value="$PROJECT_DIR$/code/FileLoader.py" />
-        <option value="$PROJECT_DIR$/code/utils.py" />
         <option value="$PROJECT_DIR$/code/DataCenter.py" />
         <option value="$PROJECT_DIR$/definitions.py" />
         <option value="$PROJECT_DIR$/code/FetureExtractorUtil.py" />
@@ -186,16 +221,18 @@
         <option value="$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py" />
         <option value="$PROJECT_DIR$/code/__init__.py" />
         <option value="$PROJECT_DIR$/code/log/Log.py" />
-        <option value="$PROJECT_DIR$/code/features/FeatureSelection.py" />
         <option value="$PROJECT_DIR$/code/data_handles/DataCenter.py" />
         <option value="$PROJECT_DIR$/code/log/Print.py" />
         <option value="$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py" />
         <option value="$PROJECT_DIR$/code/_definitions.py" />
-        <option value="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" />
         <option value="$PROJECT_DIR$/code/classifiers/AutoEncoder.py" />
         <option value="$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py" />
+        <option value="$PROJECT_DIR$/code/features/FeatureSelection.py" />
+        <option value="$PROJECT_DIR$/code/utils.py" />
         <option value="$PROJECT_DIR$/code/Evaluator.py" />
         <option value="$PROJECT_DIR$/code/main.py" />
+        <option value="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" />
+        <option value="$PROJECT_DIR$/code/classifiers/LOF.py" />
       </list>
     </option>
   </component>
@@ -206,10 +243,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="960" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -227,6 +263,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,20 +305,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="features" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Awsomoriarty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Awsomoriarty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="classifiers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/_Guy/lf2ai" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/code/utils.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -833,23 +887,28 @@
       <option name="project" value="LOCAL" />
       <updated>1500042412861</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="so that's that; &#10;major optimization for threshold experiments of neural networks&#10;+ some other stuff&#10;lot's of stuff basically">
+      <created>1500074557371</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1500074557371</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="960" y="0" width="960" height="1040" extended-state="0" />
     <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36888888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47619048" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16897655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780084" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43290043" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -858,6 +917,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -869,7 +929,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a main file" />
     <MESSAGE value="hello world" />
     <MESSAGE value="working paths and printing" />
     <MESSAGE value="git ignore" />
@@ -894,22 +953,16 @@
     <MESSAGE value="'evaluate_classifier_in_range' for experiments with deifferent thresholds&#10;&#10;(TODO: 'evaluate_ids_in_range')" />
     <MESSAGE value="bat ZONNA" />
     <MESSAGE value="information gain implemented (decision tree version)" />
-    <option name="LAST_COMMIT_MESSAGE" value="information gain implemented (decision tree version)" />
+    <MESSAGE value="so that's that; &#10;major optimization for threshold experiments of neural networks&#10;+ some other stuff&#10;lot's of stuff basically" />
+    <option name="LAST_COMMIT_MESSAGE" value="so that's that; &#10;major optimization for threshold experiments of neural networks&#10;+ some other stuff&#10;lot's of stuff basically" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/code/_definitions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -937,19 +990,19 @@
         <state relative-caret-position="323">
           <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="false" />
-            <element signature="e#698#753#0" expanded="false" />
-            <element signature="e#798#880#0" expanded="false" />
-            <element signature="e#955#1313#0" expanded="false" />
-            <element signature="e#1364#1437#0" expanded="false" />
-            <element signature="e#1491#1566#0" expanded="false" />
-            <element signature="e#1922#2044#0" expanded="false" />
-            <element signature="e#2094#2159#0" expanded="false" />
-            <element signature="e#2204#2273#0" expanded="false" />
-            <element signature="e#2363#2529#0" expanded="false" />
-            <element signature="e#2575#2828#0" expanded="false" />
-            <element signature="e#3102#3202#0" expanded="false" />
-            <element signature="e#3257#3881#0" expanded="false" />
+            <element signature="e#496#551#0" expanded="false" />
+            <element signature="e#596#678#0" expanded="false" />
+            <element signature="e#753#1111#0" expanded="false" />
+            <element signature="e#1162#1235#0" expanded="false" />
+            <element signature="e#1289#1364#0" expanded="false" />
+            <element signature="e#1444#1650#0" expanded="false" />
+            <element signature="e#1704#1763#0" expanded="false" />
+            <element signature="e#1833#1955#0" expanded="false" />
+            <element signature="e#2005#2070#0" expanded="false" />
+            <element signature="e#2115#2184#0" expanded="false" />
+            <element signature="e#2678#2931#0" expanded="false" />
+            <element signature="e#3205#3305#0" expanded="false" />
+            <element signature="e#3360#3984#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1124,13 +1177,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/classifiers/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1142,19 +1188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-          <folding>
-            <element signature="e#192#233#0" expanded="false" />
-            <element signature="e#291#713#0" expanded="false" />
-            <element signature="e#830#2253#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,15 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1178,18 +1202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#826#837#0" expanded="false" />
-            <element signature="e#887#928#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1204,20 +1216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="28" column="67" lean-forward="false" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/ids/ContiguousOnesIDS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#725#736#0" expanded="false" />
-            <element signature="e#786#827#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1225,7 +1223,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="1343" column="0" lean-forward="false" selection-start-line="1343" selection-start-column="0" selection-end-line="1343" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1237,97 +1234,159 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/features/FeatureSelection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/features/FetureExtractorUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-          <folding>
-            <element signature="e#698#753#0" expanded="false" />
-            <element signature="e#798#880#0" expanded="false" />
-            <element signature="e#955#1313#0" expanded="false" />
-            <element signature="e#1364#1437#0" expanded="false" />
-            <element signature="e#1922#2044#0" expanded="false" />
-            <element signature="e#2094#2159#0" expanded="false" />
-            <element signature="e#2204#2273#0" expanded="false" />
-            <element signature="e#2363#2529#0" expanded="false" />
-            <element signature="e#2575#2828#0" expanded="false" />
-            <element signature="e#3102#3202#0" expanded="false" />
-            <element signature="e#3257#3881#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/classifiers/LSTMAutoEncoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="61" column="22" lean-forward="true" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
-          <folding>
-            <element signature="e#600#835#0" expanded="false" />
-            <element signature="e#869#929#0" expanded="false" />
-            <element signature="e#972#1612#0" expanded="false" />
-            <element signature="e#2297#2424#0" expanded="false" />
-            <element signature="e#2472#2972#0" expanded="false" />
-            <element signature="e#3011#3022#0" expanded="false" />
-            <element signature="e#3072#3113#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/classifiers/AutoEncoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="340">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/_definitions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="272">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/main.py">
+    <entry file="file://$PROJECT_DIR$/code/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="24" column="106" lean-forward="true" selection-start-line="24" selection-start-column="106" selection-end-line="24" selection-end-column="106" />
+        <state relative-caret-position="1020">
+          <caret line="64" column="42" lean-forward="false" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/classifiers/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/ids/AccumulativeOnesIDS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#826#837#0" expanded="false" />
+            <element signature="e#887#928#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/ids/ContiguousOnesIDS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#725#736#0" expanded="false" />
+            <element signature="e#786#827#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/Evaluator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
+        <state relative-caret-position="1224">
+          <caret line="165" column="26" lean-forward="false" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
           <folding>
-            <element signature="e#158#422#0" expanded="false" />
-            <element signature="e#1262#1394#0" expanded="false" />
-            <element signature="e#1445#1478#0" expanded="false" />
-            <element signature="e#1552#3050#0" expanded="false" />
-            <element signature="e#3392#3463#0" expanded="false" />
-            <element signature="e#3539#4091#0" expanded="false" />
-            <element signature="e#5510#5673#0" expanded="false" />
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#231#495#0" expanded="false" />
+            <element signature="e#654#986#0" expanded="false" />
+            <element signature="e#1077#1280#0" expanded="false" />
+            <element signature="e#1335#1467#0" expanded="false" />
+            <element signature="e#1518#1551#0" expanded="false" />
+            <element signature="e#1625#3194#0" expanded="false" />
+            <element signature="e#3292#3434#0" expanded="false" />
+            <element signature="e#3536#3607#0" expanded="false" />
+            <element signature="e#3683#4235#0" expanded="false" />
+            <element signature="e#4493#5005#0" expanded="false" />
+            <element signature="e#5654#5817#0" expanded="false" />
+            <element signature="e#5941#6355#0" expanded="false" />
+            <element signature="e#7020#7328#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/classifiers/ClassifierGenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="e#1068#1694#0" expanded="false" />
+            <element signature="e#1758#3343#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/features/FeatureSelection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#235#873#0" expanded="false" />
+            <element signature="e#962#1534#0" expanded="false" />
+            <element signature="e#1599#1800#0" expanded="false" />
+            <element signature="e#1864#2294#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/features/FetureExtractorUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="e#496#551#0" expanded="false" />
+            <element signature="e#596#678#0" expanded="false" />
+            <element signature="e#753#1111#0" expanded="false" />
+            <element signature="e#1162#1235#0" expanded="false" />
+            <element signature="e#1289#1364#0" expanded="false" />
+            <element signature="e#1444#1650#0" expanded="false" />
+            <element signature="e#1704#1763#0" expanded="false" />
+            <element signature="e#1833#1955#0" expanded="false" />
+            <element signature="e#2005#2070#0" expanded="false" />
+            <element signature="e#2115#2184#0" expanded="false" />
+            <element signature="e#2678#2931#0" expanded="false" />
+            <element signature="e#3205#3305#0" expanded="false" />
+            <element signature="e#3360#3984#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/classifiers/OneClassSVMCustomized.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/classifiers/AutoEncoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/classifiers/LOF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

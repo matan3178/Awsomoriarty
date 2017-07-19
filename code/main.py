@@ -1,10 +1,11 @@
 from tables.idxutils import infinity
 from code.log.Print import *
-from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range
+from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range, \
+    benign_and_fraud_sets_to_x_y
 from code._definitions import VERBOSITY_general
 from code.classifiers.ClassifierGenerator import *
 from code.data_handles.DataCenter import DataCenter
-from code.features.FeatureSelection import split_information_gain
+from code.features.FeatureSelection import split_information_gain, select_k_best_features
 from code.features.FetureExtractorUtil import start, remove_all_columns_except
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
@@ -25,21 +26,24 @@ def do_something():
         testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
 
         print("selecting features...", HEADER)
-        features = list()
-        for name, i in zip(dc.features_names, range(len(dc.features_names))):
-            features.append([name, i])
+        # features = list()
+        # for name, i in zip(dc.features_names, range(len(dc.features_names))):
+        #     features.append([name, i])
+        #
+        # info_gain_to_name = dict()
+        # for name, index in features:
+        #     gain = split_information_gain(l1_data=testing_benign, l2_data=testing_theft, feature_index=index)
+        #     info_gain_to_name[gain] = name
+        #     print("{}: {}".format(name, gain))
+        #
+        # best_gains = sorted(info_gain_to_name.keys())[len(info_gain_to_name.keys())-9:]
+        # selected_feature_names = [info_gain_to_name[gain] for gain in best_gains]
+        # selected_feature_indexes = [feature[1] for feature in features if feature[0] in selected_feature_names]
+        # print("selected features: {}; (gains: {})".format(selected_feature_names, best_gains), OKBLUE)
+        # print("")
 
-        info_gain_to_name = dict()
-        for name, index in features:
-            gain = split_information_gain(l1_data=testing_benign, l2_data=testing_theft, feature_index=index)
-            info_gain_to_name[gain] = name
-            print("{}: {}".format(name, gain))
+        selected_feature_indexes = select_k_best_features(k=15, label1_data=testing_benign, label2_data=testing_theft)
 
-        best_gains = sorted(info_gain_to_name.keys())[len(info_gain_to_name.keys())-9:]
-        selected_feature_names = [info_gain_to_name[gain] for gain in best_gains]
-        selected_feature_indexes = [feature[1] for feature in features if feature[0] in selected_feature_names]
-        print("selected features: {}; (gains: {})".format(selected_feature_names, best_gains), OKBLUE)
-        print("")
         training_set = remove_all_columns_except(training_set, selected_feature_indexes)
         testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
         testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
@@ -48,9 +52,9 @@ def do_something():
         classifiers = list()
         # classifiers.append(generate_one_class_svm_linear())
         # classifiers.append(generate_one_class_svm_sigmoid())
-        # classifiers.append(generate_one_class_svm_rbf())
+        classifiers.append(generate_one_class_svm_rbf())
         # classifiers.append(generate_one_class_svm_poly())
-        classifiers.append(generate_autoencoder(len(training_set[0])))
+        # classifiers.append(generate_autoencoder(len(training_set[0])))
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
 
         print("training classifiers...", HEADER)
@@ -71,8 +75,10 @@ def do_something():
                 evaluate_classifier(c, testing_benign, testing_theft, VERBOSITY_general)
 
         IDSs = list()
-        IDSs.extend([ContiguousOnesIDS(classifier=c, threshold=15) for c in classifiers])
-        IDSs.extend([AccumulativeOnesIDS(classifier=c, threshold=15) for c in classifiers])
+        for c in classifiers:
+            for i in range(15):
+                IDSs.append(ContiguousOnesIDS(classifier=c, threshold=i+1))
+                IDSs.append(AccumulativeOnesIDS(classifier=c, threshold=i+1))
 
         print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
         print("")

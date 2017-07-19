@@ -1,21 +1,6 @@
-from math import log
-
-from tables.idxutils import infinity
-
+from code.features.FetureExtractorUtil import get_column
 from code.log.Print import *
-
-
-def calc_entropy(l1_size, l2_size):
-    if l2_size == 0:
-        return infinity
-    elif l1_size == 0:
-        return 0
-
-    n = l1_size + l2_size
-    p1 = l1_size / n
-    p2 = l1_size / n
-
-    return (p1 * log(p1)) + (p2 * log(p2))
+from code.utils import mean, standard_deviation, entropy
 
 
 def information_gain_using_split_value(l1_data, l2_data, feature_index, split_value):
@@ -31,7 +16,7 @@ def information_gain_using_split_value(l1_data, l2_data, feature_index, split_va
     len_split20 = len(l2_split[0])
     len_split21 = len(l2_split[1])
 
-    return calc_entropy(len1, len2) - calc_entropy(len_split10, len_split11) - calc_entropy(len_split20, len_split21)
+    return entropy(len1, len2) - entropy(len_split10, len_split11) - entropy(len_split20, len_split21)
 
 
 def split_information_gain(l1_data, l2_data, feature_index, number_of_steps=100):
@@ -44,3 +29,21 @@ def split_information_gain(l1_data, l2_data, feature_index, number_of_steps=100)
     info_gains = [information_gain_using_split_value(l1_data, l2_data, feature_index, split_value)
                   for split_value in [split_min + step_size * i for i in range(number_of_steps)]]
     return max(info_gains)
+
+
+def fisher_score(label1_data_column, label2_data_column):
+    u1 = mean(label1_data_column)
+    u2 = mean(label2_data_column)
+    s1 = standard_deviation(label1_data_column, u1)
+    s2 = standard_deviation(label2_data_column, u2)
+    return abs(u1 - u2) / s1 + s2
+
+
+def select_k_best_features(k, label1_data, label2_data):
+    num_of_features = len(label1_data[0])
+    scores = [[i, fisher_score(get_column(label1_data, i), get_column(label2_data, i))] for i in range(num_of_features)]
+    scores = sorted(scores, key=lambda tuple: tuple[1], reverse=True)
+    print("scores: {}".format(scores), OKBLUE)
+    selected_features = [tuple[0] for tuple in scores[:k]]
+    print("selected: {}".format(selected_features), OKBLUE + BOLD)
+    return selected_features

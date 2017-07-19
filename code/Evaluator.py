@@ -1,4 +1,8 @@
+from math import isnan
+from numbers import Number
+
 import numpy as np
+from numpy import nan
 from tables.idxutils import infinity
 from code.log.Print import *
 
@@ -69,12 +73,13 @@ def evaluate_predictions(target_labels, predictions, verbosity=0):
         color = COMMENT
         if verbosity > 1:
             color = NORMAL
-        print("error rate: {}".format(err_rate), color)
-        print("recall: {}".format(recall), COMMENT)
-        print("precision: {}".format(precision), color)
-        print("specificity: {}".format(specificity), COMMENT)
-        print("false alarm rate: {}".format(false_alarm_rate), color)
-        print("", COMMENT)
+        print("tp: {}; fp: {}; tn: {}; fn: {}".format(tp, fp, tn, fn), color)
+        print("error rate: {}".format(err_rate), COMMENT)
+        print("recall: {}".format(recall), color)
+        print("precision: {}".format(precision), COMMENT)
+        print("specificity: {}".format(specificity), color)
+        print("false alarm rate: {}".format(false_alarm_rate), COMMENT)
+        print("")
 
     return tp, fp, tn, fn, err_rate, precision, recall, specificity, false_alarm_rate
 
@@ -159,10 +164,11 @@ def evaluate_classifier_in_range(classifier, training_set, test_set_benign, test
     best_performance_grade = -infinity
     best_result = "UNINITIALIZED"
     for result in results:
-        err_rate = result[1][4]
-        if 1 - err_rate > best_performance_grade:
-            best_performance_grade = 1 - err_rate
-            best_threshold = result[0]
-            best_result = result[1]
+        current_grade = result[1][6] * result[1][7]    # recall * specificity
+        if isinstance(current_grade, Number):
+            if current_grade > best_performance_grade:
+                best_performance_grade = current_grade
+                best_threshold = result[0]
+                best_result = result[1]
     print("best results achieved: {} (threshold={})".format(best_result, best_threshold), BOLD)
     return best_threshold

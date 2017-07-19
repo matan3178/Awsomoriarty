@@ -9,15 +9,9 @@ from code.utils import average_vectors, flatten_list
 
 def start(list_of_samples):
     return samples_to_np_arrays(
-        normalize_feature_vector_to_unit_size(
-            aggregate_samples_using_sliding_windows(
-                string_to_float(
-                    remove_null_rows(
-                        remove_redundent_columns(list_of_samples)
-                    )
-                ),
-                5,
-                2
+        string_to_float(
+            remove_null_rows(
+                remove_redundent_columns(list_of_samples)
             )
         )
     )
@@ -68,6 +62,10 @@ def remove_all_columns_except(list_of_samples, list_of_columns_to_keep):
     return projection
 
 
+def get_column(list_of_samples, column_index):
+    return [sample[column_index] for sample in list_of_samples]
+
+
 def sliding_windows(list_of_samples, window_size, slide_size):
     return [list_of_samples[i:i + window_size] for i in range(0, len(list_of_samples) - window_size + slide_size, slide_size)]
 
@@ -90,6 +88,15 @@ def normalize_feature_vector_to_unit_size(list_of_samples):
         result.append([x / v_size for x in lst])
 
     return result
+
+
+def normalize_using_sum_of_features(list_of_samples):
+    result = list()
+    for lst in list_of_samples:
+        s = sum(lst)
+        result.append([x / s for x in lst])
+    return result
+
 
 
 def derivate_samples(list_of_samples):
