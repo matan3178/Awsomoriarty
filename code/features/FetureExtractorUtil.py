@@ -16,8 +16,8 @@ def start(list_of_samples, encoder=None):
                         remove_redundent_columns(list_of_samples)
                     )
                 ),
-                10,
-                10
+                100,
+                100
             )
         )
     )

@@ -62,8 +62,8 @@ class OfflineLOF:
         ps = sorted([self.predict_raw_known_single(lp) for lp in self.lpoints])
         print(ps)
         middle = int(len(ps)/2)
-        self.lower_threshold = average(ps[:middle+10])
-        self.upper_threshold = average(ps[middle-10:])
+        self.lower_threshold = average(ps[:middle+int(len(ps) * 0.5 * 0.5)])
+        self.upper_threshold = average(ps[middle-int(len(ps) * 0.5 * 0.5):])
         print("lof set boundaries ({},{})".format(self.lower_threshold, self.upper_threshold))
         return
 

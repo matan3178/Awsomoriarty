@@ -53,11 +53,11 @@ def do_something():
         distances = list()
         for i in range(1, len(dc.users_testing[h])):
             # load test data
-            testing_benign, testing_theft = encode(encoder, start(dc.users_testing[h][i][0])), encode(encoder, start(dc.users_testing[h][i][1]))
+            testing_benign, testing_theft = start(dc.users_testing[h][i][0]), start(dc.users_testing[h][i][1])
 
             # filter out features based on previous feature selection
-            testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
-            testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
+            testing_benign = encode(encoder, remove_all_columns_except(testing_benign, selected_feature_indexes))
+            testing_theft = encode(encoder, remove_all_columns_except(testing_theft, selected_feature_indexes))
 
             best_dist = evaluate(classifiers, testing_benign, testing_theft)
             distances.append(best_dist)
