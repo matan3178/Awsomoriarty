@@ -24,7 +24,7 @@ def do_something():
     for h in dc.user_hashes:
         print("USER {}".format(h), HEADER)
         print("extracting features...", HEADER)
-        training_set = start(dc.users_training[h][:25000])
+        training_set = start(dc.users_training[h])
         testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
 
         print("selecting features...", HEADER)
@@ -67,6 +67,8 @@ def do_something():
         for i in range(0, len(dc.users_testing[h])):
 
             testing_benign, testing_theft = start(dc.users_testing[h][i][0]), start(dc.users_testing[h][i][1])
+
+            print("percentage of fraud samples: {}".format(len(testing_theft) / (len(testing_theft) + len(testing_benign))), OKBLUE)
 
             testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
             testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)

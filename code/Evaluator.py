@@ -165,7 +165,7 @@ def evaluate_classifier_in_range(classifier, training_set, test_set_benign, test
     best_result = "UNINITIALIZED"
     for result in results:
         tp, fp, tn, fn = result[1][0], result[1][1], result[1][2], result[1][3]
-        current_grade = 5 * tp + tn - 5 * fp - fn
+        current_grade = 3 * tp - 1 * fp
         if isinstance(current_grade, Number):
             if current_grade > best_performance_grade:
                 best_performance_grade = current_grade

@@ -39,7 +39,7 @@ def generate_autoencoder(input_size):
 
     return AutoEncoder(inner_autoencoder=autoencoder,
                        name="AutoEncoder({})->({})->({})".format(input_size, int(input_size * 0.2), input_size),
-                       epochs_number=10,
+                       epochs_number=20,
                        batch_size=2)
 
 

@@ -18,3 +18,4 @@ LIGHT_LOADING_num_of_users = 1              # -1 for all users
 LIGHT_LOADING_num_of_tests_per_user = 2     # -1 for all test files
 VERBOSITY_general = 2
 VERBOSITY_training_autoencoder = 2
+LOF_TRAIN_VERBOSITY = 1

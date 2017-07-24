@@ -3,7 +3,7 @@ from math import sqrt
 from numpy import average
 import numpy as np
 from code.log.Print import *
-
+from code._definitions import *
 
 class LofPoint:
     name = "NO-NAME"
@@ -31,7 +31,7 @@ class OfflineLOF:
         self.k = k
         return
 
-    def fit(self, xs, verbosity=0):
+    def fit(self, xs, verbosity=LOF_TRAIN_VERBOSITY):
         if verbosity > 0:
             print("training {}".format(self.get_name()))
             print("generating lpoints...")
@@ -61,8 +61,9 @@ class OfflineLOF:
         print("calculating boundaries...")
         ps = sorted([self.predict_raw_known_single(lp) for lp in self.lpoints])
         print(ps)
-        self.lower_threshold = average(ps[: int(len(ps) * 0.2) + 1])
-        self.upper_threshold = average(ps[int(len(ps) * 0.2):])
+        middle = int(len(ps)/2)
+        self.lower_threshold = average(ps[:middle])
+        self.upper_threshold = average(ps[middle:])
         print("lof set boundaries ({},{})".format(self.lower_threshold, self.upper_threshold))
         return
 

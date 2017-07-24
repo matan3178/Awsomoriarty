@@ -57,5 +57,8 @@ class AutoEncoder:
     def predict_raw(self, x_test):
         return self.predict_mses(x_test)
 
+    def predict_raw_single(self, x):
+        return self.predict_raw([x])[0]
+
     def repredict(self, raw_data):
         return self.get_predictions_from_mses(raw_data)
