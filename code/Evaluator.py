@@ -100,7 +100,8 @@ def evaluate_ids_using_real_index_inner(real_fraud_index, predicted_fraud_index,
 
 
 def evaluate_ids(ids, test_set_benign, test_set_fraud, verbosity=0):
-    print("evaluating ids {}...".format(ids.get_name()), UNDERLINE)
+    if verbosity > 0:
+        print("evaluating ids {}...".format(ids.get_name()), UNDERLINE)
     test_set = list(test_set_benign)
     test_set.extend(test_set_fraud)
 
@@ -132,13 +133,14 @@ def do_for_threshold_range(threshold_settable, generate_results_func,
     return results
 
 
-def evaluate_classifier_in_range(classifier, training_set, test_set_benign, test_set_fraud,
+def evaluate_classifier_in_range(classifier, test_set_benign, test_set_fraud,
                                  num_of_steps=100, threshold_begin=0.01, threshold_end=1,
                                  verbosity=0):
     print("evaluating {} with threshold in range [{},{}] and number of steps = {}".format(classifier.get_name(),
                                                                                           threshold_begin,
                                                                                           threshold_end, num_of_steps),
           UNDERLINE + OKBLUE)
+
     if not classifier.has_threshold():
         print("classifier doesn't have a threshold property", FAIL)
         raise Exception("(evaluate_classifier_in_range): classifier doesn't have a threshold property")

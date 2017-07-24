@@ -15,7 +15,7 @@ print("COLLECTION3V6_DIR = " + COLLECTION3V2_DIR, COMMENT)
 
 # debug:
 LIGHT_LOADING_num_of_users = 1              # -1 for all users
-LIGHT_LOADING_num_of_tests_per_user = 2     # -1 for all test files
-VERBOSITY_general = 2
+LIGHT_LOADING_num_of_tests_per_user = -1     # -1 for all test files
+VERBOSITY_general = 1
 VERBOSITY_training_autoencoder = 2
-LOF_TRAIN_VERBOSITY = 1
+LOF_TRAIN_VERBOSITY = 2
