@@ -9,10 +9,14 @@ from code.utils import average_vectors, flatten_list
 
 def start(list_of_samples):
     return samples_to_np_arrays(
-        string_to_float(
-            remove_null_rows(
-                remove_redundent_columns(list_of_samples)
-            )
+        aggregate_samples_using_sliding_windows(
+            string_to_float(
+                remove_null_rows(
+                    remove_redundent_columns(list_of_samples)
+                )
+            ),
+            10,
+            10
         )
     )
 

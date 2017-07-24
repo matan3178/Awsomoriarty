@@ -1,4 +1,6 @@
 from tables.idxutils import infinity
+
+from code.classifiers.OfflineLOF import OfflineLOF
 from code.log.Print import *
 from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range, \
     benign_and_fraud_sets_to_x_y
@@ -22,7 +24,7 @@ def do_something():
     for h in dc.user_hashes:
         print("USER {}".format(h), HEADER)
         print("extracting features...", HEADER)
-        training_set = start(dc.users_training[h])
+        training_set = start(dc.users_training[h][:25000])
         testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
 
         print("selecting features...", HEADER)
@@ -52,43 +54,51 @@ def do_something():
         classifiers = list()
         # classifiers.append(generate_one_class_svm_linear())
         # classifiers.append(generate_one_class_svm_sigmoid())
-        classifiers.append(generate_one_class_svm_rbf())
+        # classifiers.append(generate_one_class_svm_rbf())
         # classifiers.append(generate_one_class_svm_poly())
-        # classifiers.append(generate_autoencoder(len(training_set[0])))
+        classifiers.append(generate_autoencoder(len(training_set[0])))
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
+        # classifiers.append(OfflineLOF(k=3))
 
         print("training classifiers...", HEADER)
         for c in classifiers:
             train_classifier(c, training_set)
 
-        print("evaluating...", HEADER)
-        for c in classifiers:
-            if c.has_threshold():
-                opt_threshold = evaluate_classifier_in_range(classifier=c, training_set=training_set,
-                                                              test_set_benign=testing_benign, test_set_fraud=testing_theft,
-                                                              threshold_begin=0, threshold_end=0.1, num_of_steps=1000,
-                                                              verbosity=VERBOSITY_general-1)
-                c.set_threshold(opt_threshold)
-                print("{} has been set threshold {}".format(c.get_name(), opt_threshold), COMMENT)
-            else:
-                print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
-                evaluate_classifier(c, testing_benign, testing_theft, VERBOSITY_general)
+        for i in range(0, len(dc.users_testing[h])):
 
-        IDSs = list()
-        for c in classifiers:
-            for i in range(15):
-                IDSs.append(ContiguousOnesIDS(classifier=c, threshold=i+1))
-                IDSs.append(AccumulativeOnesIDS(classifier=c, threshold=i+1))
+            testing_benign, testing_theft = start(dc.users_testing[h][i][0]), start(dc.users_testing[h][i][1])
 
-        print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
-        print("")
+            testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
+            testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
 
-        for ids in IDSs:
-            current_dist = evaluate_ids(ids=ids, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)
-            if abs(current_dist) < abs(best_dist):
-                best_dist = current_dist
+            print("evaluating...", HEADER)
+            for c in classifiers:
+                if c.has_threshold():
+                    opt_threshold = evaluate_classifier_in_range(classifier=c, training_set=training_set,
+                                                                  test_set_benign=testing_benign, test_set_fraud=testing_theft,
+                                                                  threshold_begin=0, threshold_end=0.1, num_of_steps=1000,
+                                                                  verbosity=VERBOSITY_general-1)
+                    c.set_threshold(opt_threshold)
+                    print("{} has been set threshold {}".format(c.get_name(), opt_threshold), COMMENT)
+                else:
+                    print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
+                    evaluate_classifier(c, testing_benign, testing_theft, VERBOSITY_general)
 
-        print("best distance (for user {}): {}".format(h, best_dist), BOLD + OKBLUE)
+            IDSs = list()
+            for c in classifiers:
+                for i in range(15):
+                    IDSs.append(ContiguousOnesIDS(classifier=c, threshold=i+1))
+                    IDSs.append(AccumulativeOnesIDS(classifier=c, threshold=i+1))
+
+            print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
+            print("")
+
+            for ids in IDSs:
+                current_dist = evaluate_ids(ids=ids, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)
+                if abs(current_dist) < abs(best_dist):
+                    best_dist = current_dist
+
+            print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
     return
 
 

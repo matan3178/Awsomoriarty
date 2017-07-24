@@ -12,7 +12,7 @@ class AccumulativeOnesIDS:
         return "{}_AccumulativeOnes({})".format(self.threshold, self.classifier.get_name())
 
     def alert_if_theft(self, sample):
-        pred = self.classifier.predict_single(sample)
+        pred = self.classifier.predict_raw_single(sample)
         if pred == 1:
             self.num_of_contiguous_ones += 1
         else:

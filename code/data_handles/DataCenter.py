@@ -1,6 +1,6 @@
 from code._definitions import *
 from code.data_handles.FileLoader import FileLoader
-from code.features.FetureExtractorUtil import remove_redundent_rows, remove_redundent_columns
+from code.features.FetureExtractorUtil import remove_redundent_rows
 
 
 class DataCenter:
