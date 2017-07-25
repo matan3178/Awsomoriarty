@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4840087f-6a34-4a5b-9163-f398e72406e2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/Evaluator.py" afterPath="$PROJECT_DIR$/code/Evaluator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/_definitions.py" afterPath="$PROJECT_DIR$/code/_definitions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/classifiers/OfflineLOF.py" afterPath="$PROJECT_DIR$/code/classifiers/OfflineLOF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" afterPath="$PROJECT_DIR$/code/features/FetureExtractorUtil.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/log/Log.py" afterPath="$PROJECT_DIR$/code/log/Log.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/main.py" afterPath="$PROJECT_DIR$/code/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -788,7 +782,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500928552213</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="fixed a bug in LOF">
+      <created>1500973025036</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1500973025036</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -801,7 +802,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3625541" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -824,7 +825,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed a bug" />
     <MESSAGE value="file loader 'load_collevtion2v3' + empty datacenter" />
     <MESSAGE value="load_csv got read of loaded line number" />
     <MESSAGE value="conventions" />
@@ -849,7 +849,8 @@
     <MESSAGE value="                           .." />
     <MESSAGE value="offlinelof optimization" />
     <MESSAGE value="working kinda nice" />
-    <option name="LAST_COMMIT_MESSAGE" value="working kinda nice" />
+    <MESSAGE value="fixed a bug in LOF" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed a bug in LOF" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
