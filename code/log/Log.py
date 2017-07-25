@@ -10,3 +10,6 @@ class Log:
         for line in self.log:
             print(line)
         return
+
+    def get_log_string(self):
+        return "\n".join(self.log)

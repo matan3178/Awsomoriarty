@@ -1,3 +1,5 @@
+import matplotlib
+from matplotlib.pyplot import plot
 from tables.idxutils import infinity
 
 from code.classifiers.OfflineLOF import OfflineLOF
@@ -38,17 +40,18 @@ def do_something():
         # classifiers.append(generate_one_class_svm_sigmoid())
         # classifiers.append(generate_one_class_svm_rbf())
         # classifiers.append(generate_one_class_svm_poly())
-        encoder_decoder, encoder = generate_autoencoder(len(training_set[0]))
+        # encoder_decoder, encoder = generate_autoencoder(len(training_set[0]))
         # classifiers.append(encoder_decoder)
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
-        classifiers.append(OfflineLOF(k=20))
+        classifiers.append(OfflineLOF(k=10))
 
-        train_classifier(encoder_decoder, training_set)
-        training_set = encode(encoder, training_set)
+        # train_classifier(encoder_decoder, training_set)
 
         print("training classifiers...", HEADER)
         for c in classifiers:
             train_classifier(c, training_set)
+            print(c.predict_raw(testing_benign), OKBLUE)
+            print(c.predict_raw(testing_theft), FAIL)
 
         distances = list()
         for i in range(1, len(dc.users_testing[h])):
@@ -56,15 +59,17 @@ def do_something():
             testing_benign, testing_theft = start(dc.users_testing[h][i][0]), start(dc.users_testing[h][i][1])
 
             # filter out features based on previous feature selection
-            testing_benign = encode(encoder, remove_all_columns_except(testing_benign, selected_feature_indexes))
-            testing_theft = encode(encoder, remove_all_columns_except(testing_theft, selected_feature_indexes))
+            testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
+            testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
 
             best_dist = evaluate(classifiers, testing_benign, testing_theft)
             distances.append(best_dist)
             print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
             print("_____________")
-        print("_______________")
+
+        print("")
         print("distances: {}".format(distances), BOLD + OKBLUE)
+        print("")
     return
 
 
@@ -80,7 +85,7 @@ def evaluate(classifiers, testing_benign, testing_theft):
             print("{} has been set threshold {}".format(c.get_name(), opt_threshold), COMMENT)
         else:
             print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
-            evaluate_classifier(c, testing_benign, testing_theft, VERBOSITY_general)
+            evaluate_classifier(classifier=c, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)
     IDSs = list()
     for c in classifiers:
         for j in range(15):
@@ -98,9 +103,17 @@ def evaluate(classifiers, testing_benign, testing_theft):
 
 
 def main():
+    # with open("log.txt", "r") as text_file:
+    #     print("Printing LOG:____________________________________________", HEADER + BOLD + UNDERLINE)
+    #     blank_line()
+    #     print(text_file.read())
+
     print("Welcome to Awesomoriarty!", HEADER)
     do_something()
     print("bye bye", HEADER)
+
+    with open("log.txt", "w") as text_file:
+        text_file.write(LogSingleton.get_singleton().get_log_string())
     return
 
 if __name__ == "__main__":

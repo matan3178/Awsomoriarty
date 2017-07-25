@@ -8,6 +8,7 @@ from code.log.Print import *
 
 
 def benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud):
+    # print("benign_and_fraud_sets_to_x_y: __ b: {}; f: {}".format(len(test_set_benign), len(test_set_fraud)))
     test_set = list()
     test_set.extend(test_set_benign)
     test_set.extend(test_set_fraud)
@@ -21,6 +22,7 @@ def benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud):
 
 
 def evaluate_classifier(classifier, test_set_benign, test_set_fraud, verbosity=0):
+    # print("b: {}; f: {}".format(len(test_set_benign), len(test_set_fraud)))
     test_set, target_labels = benign_and_fraud_sets_to_x_y(test_set_benign, test_set_fraud)
     if verbosity > 0:
         print("evaluating classifier {}...".format(classifier.get_name()), UNDERLINE)
@@ -44,6 +46,7 @@ def classifier_predict(classifier, x_test):
 
 
 def evaluate_predictions(target_labels, predictions, verbosity=0):
+    # print("b: {}, f: {}".format(len([t for t in target_labels if t == 0]), len([t for t in target_labels if t == 1])))
     tp = 0
     fp = 0
     tn = 0

@@ -16,19 +16,14 @@ class LofPoint:
 
 
 class OfflineLOF:
-    k = 0
-    lpoints = list()
-    distances = dict()
-    nearest_neighbors = dict()
-    k_dists = dict()
-    lrds = dict()
-
-    current_id = 0
-    lower_threshold = ""
-    upper_threshold = ""
-
     def __init__(self, k=10):
+        self.current_id = 0
         self.k = k
+        self.lpoints = list()
+        self.distances = dict()
+        self.nearest_neighbors = dict()
+        self.k_dists = dict()
+        self.lrds = dict()
         return
 
     def fit(self, xs, verbosity=LOF_TRAIN_VERBOSITY):
@@ -56,15 +51,15 @@ class OfflineLOF:
                 reachabiliy_dist = max(self.distance(lpsrc.value, neighbor.value), self.k_dists[lpsrc.name])
                 lrd += reachabiliy_dist
             lrd /= self.k
+            lrd = 1 / lrd
             self.lrds[lpsrc.name] = lrd
 
         print("calculating boundaries...")
         ps = sorted([self.predict_raw_known_single(lp) for lp in self.lpoints])
-        print(ps)
-        middle = int(len(ps)/2)
-        self.lower_threshold = average(ps[:middle+int(len(ps) * 0.5 * 0.5)])
-        self.upper_threshold = average(ps[middle-int(len(ps) * 0.5 * 0.5):])
-        print("lof set boundaries ({},{})".format(self.lower_threshold, self.upper_threshold))
+        ps = ps[10: -10]
+        print(ps, WARNING)
+        self.threshold = average(ps)
+        print("{} set boundary {}".format(self.get_name(), self.threshold))
         return
 
     @staticmethod
@@ -123,8 +118,8 @@ class OfflineLOF:
     def predict_single(self, x):
         p = self.predict_raw_single(x)
         # print(p, FAIL)
-        if self.upper_threshold > p > self.lower_threshold:
-            # print("p: {} E ({}, {})".format(p, self.lower_threshold, self.upper_threshold))
+        if p > self.threshold:
+            # print("p: {} E {}".format(p, self.upper_threshold))
             return 0
         return 1
 

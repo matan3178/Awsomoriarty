@@ -9,16 +9,14 @@ from code.utils import average_vectors, flatten_list
 
 def start(list_of_samples, encoder=None):
     return samples_to_np_arrays(
-        normalize_using_sum_of_features(
-            aggregate_samples_using_sliding_windows(
-                string_to_float(
-                    remove_null_rows(
-                        remove_redundent_columns(list_of_samples)
-                    )
-                ),
-                100,
-                100
-            )
+        aggregate_samples_using_sliding_windows(
+            string_to_float(
+                remove_null_rows(
+                    remove_redundent_columns(list_of_samples)
+                )
+            ),
+            10,
+            10
         )
     )
 
@@ -74,7 +72,7 @@ def get_column(list_of_samples, column_index):
 
 def sliding_windows(list_of_samples, window_size, slide_size):
     print("sliding_windows (ws={}, ss={})".format(window_size, slide_size), COMMENT)
-    return [list_of_samples[i:i + window_size] for i in range(0, len(list_of_samples) - window_size + slide_size, slide_size)]
+    return [list_of_samples[i:i + window_size] for i in range(0, len(list_of_samples) - window_size, slide_size)]
 
 
 def windows(list_of_samples, window_size):
