@@ -9,14 +9,16 @@ from code.utils import average_vectors, flatten_list
 
 def start(list_of_samples, encoder=None):
     return samples_to_np_arrays(
-        aggregate_samples_using_sliding_windows(
-            string_to_float(
-                remove_null_rows(
-                    remove_redundent_columns(list_of_samples)
-                )
-            ),
-            10,
-            10
+        normalize_using_sum_of_features(
+            aggregate_samples_using_sliding_windows(
+                string_to_float(
+                    remove_null_rows(
+                        remove_redundent_columns(list_of_samples)
+                    )
+                ),
+                10,
+                10
+            )
         )
     )
 
@@ -64,6 +66,10 @@ def remove_all_columns_except(list_of_samples, list_of_columns_to_keep):
         projection.append(row)
 
     return projection
+
+
+def remove_column(column_number, list_of_samples):
+    return remove_all_columns_except(list_of_samples, )
 
 
 def get_column(list_of_samples, column_index):

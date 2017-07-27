@@ -1,3 +1,4 @@
+from datetime import time, datetime
 from math import isnan
 from numbers import Number
 
@@ -88,6 +89,18 @@ def evaluate_predictions(target_labels, predictions, verbosity=0):
 
 
 # ____________________________________________________ IDS
+
+
+def time_to_detect(real_uuid, found_uuid):
+    date_format = '%m/%d/%Y %H:%M:%S'
+    real = datetime.strptime(time.strftime(date_format, time.gmtime(real_uuid / 1000.)), date_format)
+    found = datetime.strptime(time.strftime(date_format, time.gmtime(found_uuid / 1000.)), date_format)
+    delta = (found-real).seconds
+    hours = int(delta/60/60)
+    delta = delta - hours*60*60
+    minutes = int(delta/60)
+    delta = delta - minutes*60
+    print("{}:{}:{}".format(hours, minutes, delta))
 
 
 def ids_predict(ids, x_test):

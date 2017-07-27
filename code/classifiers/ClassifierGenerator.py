@@ -27,9 +27,11 @@ def generate_one_class_svm_rbf():
     return OneClassSVMCustomized(svm, name="OneClassSVM_Rbf")
 
 
-def generate_autoencoder(input_size):
+def generate_autoencoder(input_size, hidden_to_input_ratio=0.2):
+    hidden_layer_size = 3
+
     input_layer = Input(shape=(input_size,))
-    hidden = Dense(units=int(input_size * 0.3), activation='sigmoid')(input_layer)
+    hidden = Dense(units=hidden_layer_size, activation='elu')(input_layer)
     output_layer = Dense(units=input_size, activation='linear')(hidden)
 
     encoder = Model(input_layer, hidden)
@@ -37,7 +39,7 @@ def generate_autoencoder(input_size):
     autoencoder.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
 
     return AutoEncoder(inner_autoencoder=autoencoder,
-                       name="AutoEncoder({})->({})->({})".format(input_size, int(input_size * 0.2), input_size),
+                       name="AutoEncoder({})->({})relu->({})linear".format(input_size, hidden_layer_size, input_size),
                        epochs_number=20,
                        batch_size=2), encoder
 

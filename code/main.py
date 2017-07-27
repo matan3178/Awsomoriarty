@@ -1,5 +1,6 @@
 import matplotlib
 from matplotlib.pyplot import plot
+from skimage.color.rgb_colors import green, red, blue
 from tables.idxutils import infinity
 
 from code.classifiers.OfflineLOF import OfflineLOF
@@ -13,6 +14,7 @@ from code.features.FeatureSelection import split_information_gain, select_k_best
 from code.features.FetureExtractorUtil import start, remove_all_columns_except, encode
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
+import code.plotting.scatter_plot as scatplot
 
 
 def do_something():
@@ -29,7 +31,7 @@ def do_something():
         testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
 
         print("selecting features...", HEADER)
-        selected_feature_indexes = select_k_best_features(k=18, label1_data=testing_benign, label2_data=testing_theft)
+        selected_feature_indexes = select_k_best_features(k=15, label1_data=testing_benign, label2_data=testing_theft)
         training_set = remove_all_columns_except(training_set, selected_feature_indexes)
         testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
         testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
@@ -40,12 +42,17 @@ def do_something():
         # classifiers.append(generate_one_class_svm_sigmoid())
         # classifiers.append(generate_one_class_svm_rbf())
         # classifiers.append(generate_one_class_svm_poly())
-        # encoder_decoder, encoder = generate_autoencoder(len(training_set[0]))
+        encoder_decoder, encoder = generate_autoencoder(len(training_set[0]), hidden_to_input_ratio=0.3)
         # classifiers.append(encoder_decoder)
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
-        classifiers.append(OfflineLOF(k=10))
+        # classifiers.append(OfflineLOF(k=5))
 
-        # train_classifier(encoder_decoder, training_set)
+        train_classifier(encoder_decoder, training_set)
+        testing_benign = encoder.predict(testing_benign)
+        testing_theft = encoder.predict(testing_theft)
+        training_set = encoder.predict(training_set)
+
+        scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
 
         print("training classifiers...", HEADER)
         for c in classifiers:
@@ -62,14 +69,17 @@ def do_something():
             testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
             testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
 
+            testing_benign = encoder.predict(testing_benign)
+            testing_theft = encoder.predict(testing_theft)
+
             best_dist = evaluate(classifiers, testing_benign, testing_theft)
             distances.append(best_dist)
             print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
+            print("plotting...", COMMENT)
+            scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
             print("_____________")
 
-        print("")
-        print("distances: {}".format(distances), BOLD + OKBLUE)
-        print("")
+        print("\ndistances: {}\n".format(distances), BOLD + OKBLUE)
     return
 
 
@@ -86,6 +96,7 @@ def evaluate(classifiers, testing_benign, testing_theft):
         else:
             print("Normal Evaluation (no threshold):", UNDERLINE + OKGREEN)
             evaluate_classifier(classifier=c, test_set_benign=testing_benign, test_set_fraud=testing_theft, verbosity=VERBOSITY_general)
+
     IDSs = list()
     for c in classifiers:
         for j in range(15):
