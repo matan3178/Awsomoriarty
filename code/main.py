@@ -1,7 +1,9 @@
+import datetime
 import matplotlib
 from matplotlib.pyplot import plot
 from skimage.color.rgb_colors import green, red, blue
 from tables.idxutils import infinity
+from win32timezone import now
 
 from code.classifiers.OfflineLOF import OfflineLOF
 from code.log.Print import *
@@ -118,12 +120,10 @@ def main():
     #     print("Printing LOG:____________________________________________", HEADER + BOLD + UNDERLINE)
     #     blank_line()
     #     print(text_file.read())
-
     print("Welcome to Awesomoriarty!", HEADER)
     do_something()
     print("bye bye", HEADER)
-
-    with open("log.txt", "w") as text_file:
+    with open("log_{}.txt".format(datetime.datetime.now()), "w") as text_file:
         text_file.write(LogSingleton.get_singleton().get_log_string())
     return
 
