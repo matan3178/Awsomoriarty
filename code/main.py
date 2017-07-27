@@ -52,7 +52,7 @@ def do_something():
         testing_theft = encoder.predict(testing_theft)
         training_set = encoder.predict(training_set)
 
-        scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
+        # scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
 
         print("training classifiers...", HEADER)
         for c in classifiers:
@@ -76,7 +76,7 @@ def do_something():
             distances.append(best_dist)
             print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
             print("plotting...", COMMENT)
-            scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
+            # scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red)
             print("_____________")
 
         print("\ndistances: {}\n".format(distances), BOLD + OKBLUE)
