@@ -28,20 +28,34 @@ def generate_one_class_svm_rbf():
 
 
 def generate_autoencoder(input_size, hidden_to_input_ratio=0.2):
-    hidden_layer_size = 3
-
+    hidden_activation = 'sigmoid'
+    output_activation = 'tanh'
     input_layer = Input(shape=(input_size,))
-    hidden = Dense(units=hidden_layer_size, activation='elu')(input_layer)
-    output_layer = Dense(units=input_size, activation='linear')(hidden)
+
+    hidden_layer_size = 4
+    hidden = Dense(units=hidden_layer_size, activation=hidden_activation)(input_layer)
+    hidden_layers = ["({}, {})".format(hidden_layer_size, hidden_activation)]
+
+    # hidden = input_layer
+    # hidden_layer_size = input_size
+    # hidden_layers = list()
+    # while hidden_layer_size / 2 > 3:
+    #     hidden_layer_size = int(hidden_layer_size/2)
+    #     hidden = Dense(units=hidden_layer_size, activation=hidden_activation)(hidden)
+    #     hidden_layers.append("({}, {})".format(hidden_layer_size, hidden_activation))
+
+    output_layer = Dense(units=input_size, activation=output_activation)(hidden)
 
     encoder = Model(input_layer, hidden)
     autoencoder = Model(input_layer, output_layer)
     autoencoder.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
 
     return AutoEncoder(inner_autoencoder=autoencoder,
-                       name="AutoEncoder({})->({})relu->({})linear".format(input_size, hidden_layer_size, input_size),
-                       epochs_number=20,
-                       batch_size=2), encoder
+                       name="AutoEncoder({})->{}->({}, {})".format(input_size,
+                                                                   "->".join(hidden_layers),
+                                                                   input_size, output_activation),
+                       epochs_number=10,
+                       batch_size=1), encoder
 
 
 def generate_lstm_autoencoder(sample_size, window_size):

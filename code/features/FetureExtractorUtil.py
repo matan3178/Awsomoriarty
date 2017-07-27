@@ -7,21 +7,30 @@ from code.log.Print import *
 from code.utils import average_vectors, flatten_list
 
 
-def start(list_of_samples, encoder=None):
+def start(list_of_samples):
     return samples_to_np_arrays(
         normalize_using_sum_of_features(
-            aggregate_samples_using_sliding_windows(
-                string_to_float(
-                    remove_null_rows(
-                        remove_redundent_columns(list_of_samples)
-                    )
-                ),
-                10,
-                10
+            derivate_samples(
+                aggregate_samples_using_sliding_windows(
+                    string_to_float(
+                        remove_null_rows(
+                            remove_redundent_columns(list_of_samples)
+                        )
+                    ),
+                    10,
+                    10
+                )
             )
         )
     )
 
+
+def cleanup(list_of_samples):
+    return string_to_float(remove_null_rows(remove_redundent_columns(list_of_samples)))
+
+
+def finish(list_of_samples):
+    return samples_to_np_arrays(list_of_samples)
 
 # data manipulation
 

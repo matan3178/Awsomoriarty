@@ -3,9 +3,14 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
-def plot2d(points_l1, points_l2, color1, color2):
-    x1, x2 = [p[0] for p in points_l1], [p[0] for p in points_l2]
-    y1, y2 = [p[1] for p in points_l1], [p[1] for p in points_l2]
+def plot1d(points_l1, points_l2, color1, color2, offset_dim=0):
+    plot2d([[p, 0] for p in points_l1], [[p, 0] for p in points_l2], color1, color2, offset_dim)
+    return
+
+
+def plot2d(points_l1, points_l2, color1, color2, offset_dim=0):
+    x1, x2 = [p[offset_dim + 0] for p in points_l1], [p[offset_dim + 0] for p in points_l2]
+    y1, y2 = [p[offset_dim + 1] for p in points_l1], [p[offset_dim + 1] for p in points_l2]
 
     x = list()
     x.extend(x1)
@@ -21,10 +26,10 @@ def plot2d(points_l1, points_l2, color1, color2):
     return
 
 
-def plot3d(points_l1, points_l2, color1, color2):
-    x1, x2 = [p[0] for p in points_l1], [p[0] for p in points_l2]
-    y1, y2 = [p[1] for p in points_l1], [p[1] for p in points_l2]
-    z1, z2 = [p[2] for p in points_l1], [p[2] for p in points_l2]
+def plot3d(points_l1, points_l2, color1, color2, offset_dim=0):
+    x1, x2 = [p[offset_dim + 0] for p in points_l1], [p[offset_dim + 0] for p in points_l2]
+    y1, y2 = [p[offset_dim + 1] for p in points_l1], [p[offset_dim + 1] for p in points_l2]
+    z1, z2 = [p[offset_dim + 2] for p in points_l1], [p[offset_dim + 2] for p in points_l2]
 
     x = list()
     x.extend(x1)
