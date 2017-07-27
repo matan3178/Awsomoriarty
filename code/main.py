@@ -59,8 +59,6 @@ def do_something():
         print("training classifiers...", HEADER)
         for c in classifiers:
             train_classifier(c, training_set)
-            print(c.predict_raw(testing_benign), OKBLUE)
-            print(c.predict_raw(testing_theft), FAIL)
 
         distances = list()
         for i in range(1, len(dc.users_testing[h])):
