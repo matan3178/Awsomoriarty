@@ -60,15 +60,18 @@ def choose_best_split_value_based_on_mean_values(feature, l1_data, l2_data):
     return (l1mean + l2mean) / 2
 
 
-def select_k_best_features(k, label1_data, label2_data):
+def select_k_best_features_naive_fiser_score(k, label1_data, label2_data):
+    num_of_features = len(label1_data[0])
+    features = list(range(num_of_features))
+    f_rs = fisher_score_feature_rankings(features, label1_data, label2_data)
+    features_sorted = sort_features_by_ranking(f_rs)
+    return [f_r[0] for f_r in f_rs[:k]]
+
+
+def select_k_best_features_fisher_score(k, label1_data, label2_data):
     num_of_features = len(label1_data[0])
     chosen_features = list()
     remaining_features = list(range(num_of_features))
-
-    # naive implementation:
-    f_rs = fisher_score_feature_rankings(remaining_features, label1_data, label2_data)
-    features_sorted = sort_features_by_ranking(f_rs)
-    return [f_r[0] for f_r in f_rs[:k]]
 
     test_data_pairs = list()
     test_data_pairs.append([label1_data, label2_data])
@@ -86,10 +89,10 @@ def select_k_best_features(k, label1_data, label2_data):
         for data_pair in test_data_pairs:
             f_rs = fisher_score_feature_rankings(remaining_features, data_pair[0], data_pair[1])
             for f_r in f_rs:
-                feature_ranking_mapping[f_r[0]] = max([f_r[1], feature_ranking_mapping[f_r[0]]])
-                # feature_ranking_mapping[f_r[0]] += f_r[1]
-        # for f in remaining_features:
-        #     feature_ranking_mapping[f] /= len(remaining_features)
+                # feature_ranking_mapping[f_r[0]] = max([f_r[1], feature_ranking_mapping[f_r[0]]])
+                feature_ranking_mapping[f_r[0]] += f_r[1]
+        for f in remaining_features:
+            feature_ranking_mapping[f] /= len(remaining_features)
 
         features_sorted = sort_features_by_ranking([[key, feature_ranking_mapping[key]] for key in feature_ranking_mapping.keys()])
         best_feature = features_sorted[0]

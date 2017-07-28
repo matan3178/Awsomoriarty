@@ -12,7 +12,7 @@ from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, 
 from code._definitions import VERBOSITY_general
 from code.classifiers.ClassifierGenerator import *
 from code.data_handles.DataCenter import DataCenter
-from code.features.FeatureSelection import split_information_gain, select_k_best_features
+from code.features.FeatureSelection import split_information_gain, select_k_best_features_fisher_score
 from code.features.FetureExtractorUtil import *
 from code.ids.AccumulativeOnesIDS import AccumulativeOnesIDS
 from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
@@ -31,14 +31,14 @@ def do_something():
         print("extracting features...", HEADER)
         # training_set = start(dc.users_training[h])
         # testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
-        agg_win_size, agg_slide_size = 5, 10
+        agg_win_size, agg_slide_size = 1, 1
         training_set = extract_features(dc.users_training[h], agg_win_size, agg_slide_size)
         testing_benign, testing_theft = dc.users_testing[h][0][0], dc.users_testing[h][0][1]
         testing_benign, testing_theft = extract_features_tests_seperated(testing_benign, testing_theft,
                                                                          agg_win_size, agg_slide_size)
 
         print("selecting features...", HEADER)
-        selected_feature_indexes = select_k_best_features(k=4, label1_data=testing_benign, label2_data=testing_theft)
+        selected_feature_indexes = select_k_best_features_fisher_score(k=15, label1_data=testing_benign, label2_data=testing_theft)
         training_set = remove_all_columns_except(training_set, selected_feature_indexes)
         testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
         testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
@@ -49,19 +49,17 @@ def do_something():
         # classifiers.append(generate_one_class_svm_sigmoid())
         # classifiers.append(generate_one_class_svm_rbf())
         # classifiers.append(generate_one_class_svm_poly())
-        # encoder_decoder, encoder = generate_autoencoder(len(training_set[0]), hidden_to_input_ratio=0.3)
+        encoder_decoder, encoder = generate_autoencoder(len(training_set[0]), hidden_to_input_ratio=0.3)
         # classifiers.append(encoder_decoder)
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
         # classifiers.append(OfflineLOF(k=10))
+        print(len(training_set))
+        train_classifier(encoder_decoder, training_set)
+        training_set = encoder_decoder.predict_raw(training_set)
+        testing_benign = encoder_decoder.predict_raw(testing_benign)
+        testing_theft = encoder_decoder.predict_raw(testing_theft)
 
-        # train_classifier(encoder_decoder, training_set)
-        # testing_benign = encoder.predict(testing_benign)
-        # testing_theft = encoder.predict(testing_theft)
-        # training_set = encoder.predict(training_set)
-
-        scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
-        scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=1)
-
+        scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
 
         print("training classifiers...", HEADER)
         for c in classifiers:
@@ -77,15 +75,14 @@ def do_something():
             testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
             testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
 
-            # testing_benign = encoder.predict(testing_benign)
-            # testing_theft = encoder.predict(testing_theft)
+            testing_benign = encoder_decoder.predict_raw(testing_benign)
+            testing_theft = encoder_decoder.predict_raw(testing_theft)
 
             best_dist = evaluate(classifiers, testing_benign, testing_theft)
             distances.append(best_dist)
             print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
             print("plotting...", COMMENT)
-            scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
-            scatplot.plot3d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=1)
+            scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
             print("_____________")
 
         print("\ndistances: {}\n".format(distances), BOLD + OKBLUE)
@@ -94,19 +91,21 @@ def do_something():
 
 def extract_features_tests_seperated(testing_benign, testing_theft, agg_win_size, agg_slide_size):
     testing = list()
+    testing_benign, testing_theft = cleanup(testing_benign), cleanup(testing_theft)
     testing.extend(testing_benign)
     testing.extend(testing_theft)
     testing = extract_features(testing, agg_win_size, agg_slide_size)
     testing_benign = testing[:int(len(testing_benign) / agg_slide_size)]
-    testing_theft = testing_benign[int(len(testing_benign) / agg_slide_size):]
+    testing_theft = testing[int(len(testing_benign) / agg_slide_size):]
+
     return testing_benign, testing_theft
 
 
 def extract_features(list_of_samples, agg_win_size=10, agg_slide_size=10):
     list_of_samples = cleanup(list_of_samples)
     list_of_samples = aggregate_samples_using_sliding_windows(list_of_samples, agg_win_size, agg_slide_size)
-    list_of_samples = derivate_samples(list_of_samples)
     list_of_samples = normalize_feature_vector_to_unit_size(list_of_samples)
+    # list_of_samples = derivate_samples(list_of_samples)
     list_of_samples = finish(list_of_samples)
     return list_of_samples
 

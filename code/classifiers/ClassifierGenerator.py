@@ -32,7 +32,7 @@ def generate_autoencoder(input_size, hidden_to_input_ratio=0.2):
     output_activation = 'tanh'
     input_layer = Input(shape=(input_size,))
 
-    hidden_layer_size = 4
+    hidden_layer_size = int(input_size * hidden_to_input_ratio)
     hidden = Dense(units=hidden_layer_size, activation=hidden_activation)(input_layer)
     hidden_layers = ["({}, {})".format(hidden_layer_size, hidden_activation)]
 
@@ -54,7 +54,7 @@ def generate_autoencoder(input_size, hidden_to_input_ratio=0.2):
                        name="AutoEncoder({})->{}->({}, {})".format(input_size,
                                                                    "->".join(hidden_layers),
                                                                    input_size, output_activation),
-                       epochs_number=10,
+                       epochs_number=15,
                        batch_size=1), encoder
 
 
