@@ -19,6 +19,10 @@ from code.ids.ContiguousOnesIDS import ContiguousOnesIDS
 import code.plotting.scatter_plot as scatplot
 
 
+def vectorize(list_of_numbers):
+    return [[n] for n in list_of_numbers]
+
+
 def do_something():
     # run_feature_extraction_tests()
 
@@ -29,12 +33,10 @@ def do_something():
     for h in dc.user_hashes:
         print("USER {}".format(h), HEADER)
         print("extracting features...", HEADER)
-        # training_set = start(dc.users_training[h])
-        # testing_benign, testing_theft = start(dc.users_testing[h][0][0]), start(dc.users_testing[h][0][1])
         agg_win_size, agg_slide_size = 1, 1
-        training_set = extract_features(dc.users_training[h], agg_win_size, agg_slide_size)
+        training_set = extract_features(dc.users_training[h], agg_win_size, agg_slide_size)[:100]
         testing_benign, testing_theft = dc.users_testing[h][0][0], dc.users_testing[h][0][1]
-        testing_benign, testing_theft = extract_features_tests_seperated(testing_benign, testing_theft,
+        testing_benign, testing_theft = extract_features_tests_separated(testing_benign, testing_theft,
                                                                          agg_win_size, agg_slide_size)
 
         print("selecting features...", HEADER)
@@ -52,14 +54,14 @@ def do_something():
         encoder_decoder, encoder = generate_autoencoder(len(training_set[0]), hidden_to_input_ratio=0.3)
         # classifiers.append(encoder_decoder)
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
-        # classifiers.append(OfflineLOF(k=10))
-        print(len(training_set))
-        train_classifier(encoder_decoder, training_set)
-        training_set = encoder_decoder.predict_raw(training_set)
-        testing_benign = encoder_decoder.predict_raw(testing_benign)
-        testing_theft = encoder_decoder.predict_raw(testing_theft)
+        classifiers.append(OfflineLOF(k=3))
 
-        scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
+        train_classifier(encoder_decoder, training_set)
+        training_set = vectorize(encoder_decoder.predict_raw(training_set))
+
+        # testing_benign = vectorize(encoder_decoder.predict_raw(testing_benign))
+        # testing_theft = vectorize(encoder_decoder.predict_raw(testing_theft))
+        # scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
 
         print("training classifiers...", HEADER)
         for c in classifiers:
@@ -69,27 +71,27 @@ def do_something():
         for i in range(1, len(dc.users_testing[h])):
             # load test data
             testing_benign, testing_theft = dc.users_testing[h][i][0], dc.users_testing[h][i][1]
-            testing_benign, testing_theft = extract_features_tests_seperated(testing_benign, testing_theft, agg_win_size, agg_slide_size)
+            testing_benign, testing_theft = extract_features_tests_separated(testing_benign, testing_theft, agg_win_size, agg_slide_size)
 
             # filter out features based on previous feature selection
             testing_benign = remove_all_columns_except(testing_benign, selected_feature_indexes)
             testing_theft = remove_all_columns_except(testing_theft, selected_feature_indexes)
 
-            testing_benign = encoder_decoder.predict_raw(testing_benign)
-            testing_theft = encoder_decoder.predict_raw(testing_theft)
+            testing_benign = vectorize(encoder_decoder.predict_raw(testing_benign))
+            testing_theft = vectorize(encoder_decoder.predict_raw(testing_theft))
 
             best_dist = evaluate(classifiers, testing_benign, testing_theft)
             distances.append(best_dist)
             print("best distance (for user {}, test {}): {}".format(h, i, best_dist), BOLD + OKBLUE)
             print("plotting...", COMMENT)
-            scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
+            # scatplot.plot1d(testing_benign, testing_theft, color1=blue, color2=red, offset_dim=0)
             print("_____________")
 
         print("\ndistances: {}\n".format(distances), BOLD + OKBLUE)
     return
 
 
-def extract_features_tests_seperated(testing_benign, testing_theft, agg_win_size, agg_slide_size):
+def extract_features_tests_separated(testing_benign, testing_theft, agg_win_size, agg_slide_size):
     testing = list()
     testing_benign, testing_theft = cleanup(testing_benign), cleanup(testing_theft)
     testing.extend(testing_benign)
@@ -126,15 +128,16 @@ def evaluate(classifiers, testing_benign, testing_theft):
 
     IDSs = list()
     for c in classifiers:
-        for j in range(30):
+        for j in range(0, 90, 3):
             IDSs.append(ContiguousOnesIDS(classifier=c, threshold=j + 1))
             IDSs.append(AccumulativeOnesIDS(classifier=c, threshold=j + 1))
-    print("EVALUATING ANOMALY DETECTORS BBAAAAATTTTT ZZZONNNNNNAAAAAAAA !!!!!!!!!!", UNDERLINE + FAIL)
+    print("EVALUATING ANOMALY DETECTORS", UNDERLINE + OKBLUE)
     print("")
     best_dist = infinity
     for ids in IDSs:
         current_dist = evaluate_ids(ids=ids, test_set_benign=testing_benign, test_set_fraud=testing_theft,
                                     verbosity=0)
+        print("{}: distance={}".format(ids, current_dist))
         if abs(current_dist) < abs(best_dist):
             best_dist = current_dist
     return best_dist
