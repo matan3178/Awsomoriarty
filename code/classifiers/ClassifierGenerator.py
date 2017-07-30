@@ -54,7 +54,7 @@ def generate_autoencoder(input_size, hidden_to_input_ratio=0.2):
                        name="AutoEncoder({})->{}->({}, {})".format(input_size,
                                                                    "->".join(hidden_layers),
                                                                    input_size, output_activation),
-                       epochs_number=15,
+                       epochs_number=1,
                        batch_size=1), encoder
 
 

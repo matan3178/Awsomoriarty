@@ -5,6 +5,8 @@ from skimage.color.rgb_colors import green, red, blue
 from tables.idxutils import infinity
 from win32timezone import now
 
+from code.classifiers.MultiLOF import MultiLOF
+from code.classifiers.MultiMultiLOF import MultiMultiLOF
 from code.classifiers.OfflineLOF import OfflineLOF
 from code.log.Print import *
 from code.Evaluator import evaluate_classifier, evaluate_ids, train_classifier, evaluate_classifier_in_range, \
@@ -33,8 +35,8 @@ def do_something():
     for h in dc.user_hashes:
         print("USER {}".format(h), HEADER)
         print("extracting features...", HEADER)
-        agg_win_size, agg_slide_size = 1, 1
-        training_set = extract_features(dc.users_training[h], agg_win_size, agg_slide_size)[:100]
+        agg_win_size, agg_slide_size = 1, 10
+        training_set = extract_features(dc.users_training[h], agg_win_size, agg_slide_size)
         testing_benign, testing_theft = dc.users_testing[h][0][0], dc.users_testing[h][0][1]
         testing_benign, testing_theft = extract_features_tests_separated(testing_benign, testing_theft,
                                                                          agg_win_size, agg_slide_size)
@@ -54,7 +56,7 @@ def do_something():
         encoder_decoder, encoder = generate_autoencoder(len(training_set[0]), hidden_to_input_ratio=0.3)
         # classifiers.append(encoder_decoder)
         # classifiers.append(generate_lstm_autoencoder(len(training_set[0]), 5))
-        classifiers.append(OfflineLOF(k=3))
+        classifiers.append(MultiMultiLOF(num_of_mlofs=1000, num_of_samples_per_lof=3, k=3))
 
         train_classifier(encoder_decoder, training_set)
         training_set = vectorize(encoder_decoder.predict_raw(training_set))
@@ -105,7 +107,8 @@ def extract_features_tests_separated(testing_benign, testing_theft, agg_win_size
 
 def extract_features(list_of_samples, agg_win_size=10, agg_slide_size=10):
     list_of_samples = cleanup(list_of_samples)
-    list_of_samples = aggregate_samples_using_sliding_windows(list_of_samples, agg_win_size, agg_slide_size)
+    if agg_win_size != 1 or agg_slide_size != 1:
+        list_of_samples = aggregate_samples_using_sliding_windows(list_of_samples, agg_win_size, agg_slide_size)
     list_of_samples = normalize_feature_vector_to_unit_size(list_of_samples)
     # list_of_samples = derivate_samples(list_of_samples)
     list_of_samples = finish(list_of_samples)
@@ -137,7 +140,7 @@ def evaluate(classifiers, testing_benign, testing_theft):
     for ids in IDSs:
         current_dist = evaluate_ids(ids=ids, test_set_benign=testing_benign, test_set_fraud=testing_theft,
                                     verbosity=0)
-        print("{}: distance={}".format(ids, current_dist))
+        print("{}: distance={}".format(ids.get_name(), current_dist))
         if abs(current_dist) < abs(best_dist):
             best_dist = current_dist
     return best_dist

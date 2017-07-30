@@ -57,7 +57,6 @@ class OfflineLOF:
         print("calculating boundaries...")
         ps = sorted([self.predict_raw_known_single(lp) for lp in self.lpoints])
         ps = ps[10: -10]
-        print(ps, WARNING)
         self.threshold = average(ps)
         print("{} set boundary {}".format(self.get_name(), self.threshold))
         return
@@ -74,6 +73,8 @@ class OfflineLOF:
         return max([d, k_d])
 
     def k_nearest_neighbors(self, o, k):
+        if len(self.lpoints) <= k:
+            return [lp for lp in self.lpoints]
         # algorithm runtime: O(k * n)
         # where n is the number of points in the training set
         #
@@ -84,7 +85,7 @@ class OfflineLOF:
 
         # a pool consisting of the k nearest neighbors of o at a given point
         k_nearest = sorted(left_d_ns[:k], key=lambda d_n: d_n[0])
-        left_points = left_d_ns[k:]
+        left_d_ns = left_d_ns[k:]
         max_dist = k_nearest[k - 1][0]
 
         for d_n in left_d_ns:
